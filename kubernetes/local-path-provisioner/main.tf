@@ -4,7 +4,9 @@ resource "helm_release" "local_path_provisioner" {
   create_namespace = false
   repository       = "oci://ghcr.io/tenzin-io"
   chart            = "local-path-provisioner"
-  version          = "v0.0.26-tenzin"
+  version          = "v0.0.26"
   wait             = true
-  values           = [templatefile("${path.module}/templates/values.yaml", {})]
+  values = [templatefile("${path.module}/templates/values.yaml", {
+    image_tag = "v0.0.26"
+  })]
 }
