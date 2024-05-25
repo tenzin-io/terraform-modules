@@ -39,3 +39,7 @@ ingress:
   - hosts:
     - ${jupyterhub_fqdn}
     secretName: jupyterhub-tls-secret
+
+proxy:
+  service:
+    type: ClusterIP
