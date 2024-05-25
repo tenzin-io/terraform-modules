@@ -12,46 +12,18 @@ resource "helm_release" "cert_manager" {
   }
 }
 
-resource "kubernetes_secret_v1" "cloudflare_api_token" {
-  metadata {
-    name      = "cloudflare-api-token"
-    namespace = var.namespace
-  }
+resource "helm_release" "cert_manager_config" {
+  depends_on = [ helm_release.cert_manager ]
+  name             = "cert-manager-config"
+  namespace        = var.namespace
+  create_namespace = false
+  repository       = "oci://ghcr.io/tenzin-io"
+  chart            = "cert-manager-config"
+  version          = "v0.0.1"
+  wait             = true
 
-  data = {
-    token = var.cloudflare_api_token
-  }
-}
-
-resource "kubernetes_manifest" "lets_encrypt_cluster_issuer" {
-  count      = var.enable_lets_encrypt_issuer == true ? 1 : 0
-  depends_on = [helm_release.cert_manager, kubernetes_secret_v1.cloudflare_api_token]
-  manifest = {
-    apiVersion = "apiextensions.k8s.io/v1"
-    kind       = "CustomResourceDefinition"
-
-    metadata = {
-      name = "lets-encrypt"
-    }
-
-    spec = {
-      acme = {
-        server = "https://acme-v02.api.letsencrypt.org/directory"
-        private_key_secret_ref = {
-          name = "lets-encrypt-issuer-private-key"
-        }
-
-        solvers = {
-          dns01 = {
-            cloudflare = {
-              api_token_secret_ref = {
-                name = "cloudflare-api-token"
-                key  = "token"
-              }
-            }
-          }
-        }
-      }
-    }
+  set {
+    name = "cloudflare.apiToken"
+    value = var.cloudflare_api_token
   }
 }
