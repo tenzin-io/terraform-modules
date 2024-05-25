@@ -74,6 +74,9 @@ kubeControllerManager:
 coreDns:
   enabled: false
 
+kubeDns:
+  enabled: false
+
 kubeEtcd:
   enabled: false
 
@@ -87,6 +90,9 @@ kubeStateMetrics:
   enabled: false
 
 nodeExporter:
+  enabled: false
+
+kubeApiServer:
   enabled: false
 
 prometheusOperator:
