@@ -13,17 +13,22 @@ resource "helm_release" "cert_manager" {
 }
 
 resource "helm_release" "cert_manager_config" {
-  depends_on = [ helm_release.cert_manager ]
+  depends_on       = [helm_release.cert_manager]
   name             = "cert-manager-config"
   namespace        = var.namespace
   create_namespace = false
   repository       = "oci://ghcr.io/tenzin-io"
   chart            = "cert-manager-config"
-  version          = "v0.0.1"
+  version          = "v0.0.2"
   wait             = true
 
   set {
-    name = "cloudflare.apiToken"
+    name  = "cloudflare.apiToken"
     value = var.cloudflare_api_token
+  }
+
+  set {
+    name  = "issuer.name"
+    value = var.cert_issuer_name
   }
 }
