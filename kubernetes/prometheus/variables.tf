@@ -58,8 +58,3 @@ variable "kubernetes_cluster_name" {
   type        = string
   description = "Add a label to the metrics identify the cluster name."
 }
-
-variable "certificate_issuer_name" {
-  type        = string
-  description = "The cert-manager certificate issuer name."
-}
