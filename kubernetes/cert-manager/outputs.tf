@@ -1,4 +1,4 @@
 output "cert_issuer_name" {
-  value       = try(kubernetes_manifest.lets_encrypt_cluster_issuer.0.manifest.metadata.0.name, null)
+  value       = var.cert_issuer_name
   description = "The name of the certificate issuer"
 }
