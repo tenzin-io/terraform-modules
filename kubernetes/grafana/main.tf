@@ -39,7 +39,7 @@ resource "helm_release" "grafana" {
       cert_issuer_name         = var.cert_issuer_name
       enable_github_oauth      = var.enable_github_oauth
       github_org_name          = var.github_org_name
-      github_oauth_secret_name = "github-auth-credentials"
+      github_oauth_secret_name = "github-oauth-credentials"
     })
   ]
 }
