@@ -1,0 +1,109 @@
+defaultRules:
+  create: true
+  rules:
+    alertmanager: false
+    etcd: false
+    configReloaders: false
+    general: false
+    k8s: false
+    kubeApiserverAvailability: false
+    kubeApiserverBurnrate: false
+    kubeApiserverHistogram: false
+    kubeApiserverSlos: false
+    kubeControllerManager: false
+    kubelet: false
+    kubeProxy: false
+    kubePrometheusGeneral: false
+    kubePrometheusNodeRecording: false
+    kubernetesApps: false
+    kubernetesResources: false
+    kubernetesStorage: false
+    kubernetesSystem: false
+    kubeSchedulerAlerting: false
+    kubeSchedulerRecording: false
+    kubeStateMetrics: false
+    network: false
+    node: false
+    nodeExporterAlerting: false
+    nodeExporterRecording: false
+    prometheus: false
+    prometheusOperator: false
+
+grafana:
+  enabled: false
+
+alertmanager:
+  enabled: ${enable_alertmanager}
+  config:
+    global:
+      resolve_timeout: 5m
+
+    route:
+      group_by: ['alertname','cluster','namespace']
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 12h
+
+      %{~ if alert_receiver_name != "" ~}
+      receiver: "${alert_receiver_name}"
+      routes:
+        - receiver: "${alert_receiver_name}"
+      %{~ endif ~}
+
+    %{~ if alert_receiver_name != "" ~}
+    receivers:
+      - name: "${alert_receiver_name}"
+        webhook_configs:
+          - url: "${alert_receiver_url}"
+            send_resolved: true
+            http_config:
+              basic_auth:
+                username: ${alert_receiver_username}
+                password: ${alert_receiver_password}
+    %{~ endif ~}
+
+    templates:
+      - '/etc/alertmanager/config/*.tmpl'
+
+kubelet:
+  enabled: false
+
+kubeControllerManager:
+  enabled: false
+
+coreDns:
+  enabled: false
+
+kubeEtcd:
+  enabled: false
+
+kubeScheduler:
+  enabled: false
+
+kubeProxy:
+  enabled: false
+
+kubeStateMetrics:
+  enabled: false
+
+nodeExporter:
+  enabled: false
+
+prometheusOperator:
+  admissionWebhooks:
+    enabled: false
+  tls:
+    enabled: false
+
+prometheus:
+  prometheusSpec:
+    externalLabels:
+      cluster: ${kubernetes_cluster_name}
+    retention: ${metrics_retention_duration}
+    scrapeInterval: ${metrics_scrape_interval}
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          resources:
+            requests:
+              storage: ${prometheus_volume_size} 
