@@ -4,6 +4,12 @@ variable "namespace" {
   description = "The namespace to deploy cert-manager"
 }
 
+variable "cert_issuer_name" {
+  type        = string
+  default     = "lets-encrypt"
+  description = "The name of the certificate issuer"
+}
+
 variable "cloudflare_api_token" {
   type        = string
   description = "CloudFlare API token"
