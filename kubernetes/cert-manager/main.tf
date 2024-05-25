@@ -31,8 +31,7 @@ resource "kubernetes_manifest" "lets_encrypt_cluster_issuer" {
     kind       = "CustomResourceDefinition"
 
     metadata = {
-      name      = "lets-encrypt"
-      namespace = var.namespace
+      name = "lets-encrypt"
     }
 
     spec = {
