@@ -45,8 +45,8 @@ grafana.ini:
     enabled: true
     allow_sign_up: true
     auto_login: true
-    allowed_organizations: ${github_org_name}
-    role_attribute_path: contains(groups[*], '@${github_org_name}/grafana-admins') && 'Admin' || 'Viewer'
+    allowed_organizations: ${allowed_github_organization}
+    role_attribute_path: contains(groups[*], '@${allowed_github_organization}/grafana-admins') && 'Admin' || 'Viewer'
     client_id: $__env{GITHUB_OAUTH_CLIENT_ID}
     client_secret: $__env{GITHUB_OAUTH_CLIENT_SECRET}
   %{~ endif ~}

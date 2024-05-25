@@ -12,10 +12,14 @@ terraform {
   }
 }
 
+locals {
+  github_oauth_secret_name = "github-oauth-credentials"
+}
+
 resource "kubernetes_secret_v1" "github_oauth_secret" {
   count = var.enable_github_oauth ? 1 : 0
   metadata {
-    name      = "github-oauth-credentials"
+    name      = local.github_oauth_secret_name
     namespace = var.namespace
   }
   data = {
@@ -34,12 +38,12 @@ resource "helm_release" "grafana" {
   create_namespace = true
   values = [
     templatefile("${path.module}/templates/values.yaml", {
-      grafana_volume_size      = var.grafana_volume_size
-      grafana_fqdn             = var.grafana_fqdn
-      cert_issuer_name         = var.cert_issuer_name
-      enable_github_oauth      = var.enable_github_oauth
-      github_org_name          = var.github_org_name
-      github_oauth_secret_name = "github-oauth-credentials"
+      grafana_volume_size         = var.grafana_volume_size
+      grafana_fqdn                = var.grafana_fqdn
+      cert_issuer_name            = var.cert_issuer_name
+      enable_github_oauth         = var.enable_github_oauth
+      allowed_github_organization = var.allowed_github_organization
+      github_oauth_secret_name    = local.github_oauth_secret_name
     })
   ]
 }

@@ -1,12 +1,12 @@
 variable "namespace" {
   type        = string
   default     = "monitoring"
-  description = "The namespace to deploy Grafana"
+  description = "The namespace to deploy Grafana."
 }
 variable "grafana_volume_size" {
   type        = string
   default     = "20Gi"
-  description = "The persistent volume size to store Grafana data"
+  description = "The persistent volume size to store Grafana data."
 }
 
 variable "cert_issuer_name" {
@@ -21,26 +21,26 @@ variable "grafana_fqdn" {
 
 variable "enable_github_oauth" {
   type        = bool
-  description = "Enable GitHub OAuth for Grafana"
+  description = "Enable GitHub OAuth for Grafana."
   default     = false
 }
 
-variable "github_org_name" {
+variable "allowed_github_organization" {
   type        = string
-  description = "The name of the GitHub organization to allow sign-in to Granfa"
+  description = "The GitHub organization name to allow access to Grafana."
   default     = ""
 }
 
 variable "github_oauth_client_id" {
   type        = string
   sensitive   = true
-  description = "GitHub OAuth app client id"
+  description = "GitHub OAuth app client id."
   default     = ""
 }
 
 variable "github_oauth_client_secret" {
   type        = string
   sensitive   = true
-  description = "GitHub OAuth app client secret"
+  description = "GitHub OAuth app client secret."
   default     = ""
 }
