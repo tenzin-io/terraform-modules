@@ -27,23 +27,23 @@ datasources:
           manageAlerts: false
           prometheusType: Prometheus
           prometheusVersion: '0.73.2'
-      
-grafana.ini:
-  server:
-    root_url: "https://%(domain)s"
+grafana:
+  envFromSecret: ${github_oauth_secret_name}
+  grafana.ini:
+    server:
+      root_url: "https://%(domain)s"
 
-  users:
-    default_theme: light
-    allow_sign_up: false
+    users:
+      default_theme: light
+      allow_sign_up: false
 
-%{~ if enable_github_oauth ~}
-  auth.github:
-    enabled: true
-    allow_sign_up: true
-    auto_login: true
-    allowed_organizations: ${github_org_name}
-    role_attribute_path: contains(groups[*], '@${github_org_name}/grafana-admins') && 'Admin' || 'Viewer'
-    client_secret: ${github_oauth_client_secret}
-    client_id: ${github_oauth_client_id}
-%{~ endif ~}
-
+    %{~ if enable_github_oauth ~}
+    auth.github:
+      enabled: true
+      allow_sign_up: true
+      auto_login: true
+      allowed_organizations: ${github_org_name}
+      role_attribute_path: contains(groups[*], '@${github_org_name}/grafana-admins') && 'Admin' || 'Viewer'
+      client_secret: $__env{GITHUB_OAUTH_CLIENT_SECRET}
+      client_id: $__env{GITHUB_OAUTH_CLIENT_ID}
+    %{~ endif ~}
