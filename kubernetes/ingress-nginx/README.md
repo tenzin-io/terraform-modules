@@ -23,8 +23,9 @@ Useful Nginx ingress tuning and setup:
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_enable_tailscale_tunnel"></a> [enable\_tailscale\_tunnel](#input\_enable\_tailscale\_tunnel) | Enable Tailscale tunnel on Nginx controller. | `bool` | `false` | no |
-| <a name="input_namespace"></a> [namespace](#input\_namespace) | The namespace to deploy Nginx. | `string` | `"nginx"` | no |
+| <a name="input_namespace"></a> [namespace](#input\_namespace) | The namespace to deploy Nginx. | `string` | `"ingress-nginx"` | no |
 | <a name="input_nginx_service_account_name"></a> [nginx\_service\_account\_name](#input\_nginx\_service\_account\_name) | The service account name for Nginx ingress controller. | `string` | `"ingress-nginx"` | no |
 | <a name="input_nginx_service_type"></a> [nginx\_service\_type](#input\_nginx\_service\_type) | The type of Nginx ingress service. Ex. NodePort or LoadBalancer. | `string` | `"LoadBalancer"` | no |
 | <a name="input_tailscale_auth_key"></a> [tailscale\_auth\_key](#input\_tailscale\_auth\_key) | The Tailscale auth key to join to a Tailscale network. | `string` | `null` | no |
+| <a name="input_tailscale_hostname"></a> [tailscale\_hostname](#input\_tailscale\_hostname) | The Tailscale hostname to join to a Tailscale network. | `string` | `null` | no |
 <!-- END_TF_DOCS -->

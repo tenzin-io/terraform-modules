@@ -15,6 +15,7 @@ resource "helm_release" "ingress_nginx" {
     enable_tailscale_tunnel    = var.enable_tailscale_tunnel,
     nginx_service_type         = var.nginx_service_type,
     nginx_service_account_name = var.nginx_service_account_name,
+    tailscale_hostname         = var.tailscale_hostname,
   })]
   depends_on = [
     kubernetes_namespace_v1.nginx_namespace,

@@ -15,6 +15,10 @@ controller:
       imagePullPolicy: Always
       image: "ghcr.io/tailscale/tailscale:latest"
       env:
+      %{~ if tailscale_hostname != null ~}
+      - name: TS_HOSTNAME
+        value: ${tailscale_hostname}
+      %{~ endif ~}
       - name: TS_KUBE_SECRET
         value: tailscale-auth-state
       - name: TS_USERSPACE

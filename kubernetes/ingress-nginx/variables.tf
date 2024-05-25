@@ -4,6 +4,12 @@ variable "enable_tailscale_tunnel" {
   default     = false
 }
 
+variable "tailscale_hostname" {
+  type        = string
+  description = "The Tailscale hostname to join to a Tailscale network."
+  default     = null
+}
+
 variable "tailscale_auth_key" {
   type        = string
   description = "The Tailscale auth key to join to a Tailscale network."
@@ -13,7 +19,7 @@ variable "tailscale_auth_key" {
 
 variable "namespace" {
   type        = string
-  default     = "nginx"
+  default     = "ingress-nginx"
   description = "The namespace to deploy Nginx."
 }
 
