@@ -28,7 +28,11 @@ datasources:
           prometheusType: Prometheus
           prometheusVersion: '0.73.2'
 grafana:
+  
+  %{~ if enable_github_oauth ~}
   envFromSecret: ${github_oauth_secret_name}
+  %{~ endif ~}
+
   grafana.ini:
     server:
       root_url: "https://%(domain)s"
