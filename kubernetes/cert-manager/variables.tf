@@ -13,5 +13,5 @@ variable "cloudflare_api_token" {
 variable "enable_lets_encrypt_issuer" {
   type        = bool
   default     = true
-  description = "Enable the Lets Encrypt issuer" 
+  description = "Enable the Lets Encrypt issuer"
 }
