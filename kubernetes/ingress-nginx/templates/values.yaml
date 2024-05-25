@@ -1,0 +1,31 @@
+serviceAccount:
+  name: ${nginx_service_account_name}
+controller:
+  service:
+    type: ${nginx_service_type}
+
+  admissionWebhooks:
+    enabled: false
+
+  ingressClassResource:
+    default: true
+  %{~ if enable_tailscale_tunnel ~}  
+  extraContainers:
+    - name: tailscale-sidecar
+      imagePullPolicy: Always
+      image: "ghcr.io/tailscale/tailscale:latest"
+      env:
+      - name: TS_KUBE_SECRET
+        value: tailscale-auth-state
+      - name: TS_USERSPACE
+        value: "false"
+      - name: TS_AUTH_KEY
+        valueFrom:
+          secretKeyRef:
+            name: tailscale-auth-key
+            key: authKey
+      securityContext:
+        capabilities:
+          add:
+          - NET_ADMIN
+  %{~ endif ~}
