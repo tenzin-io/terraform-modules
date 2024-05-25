@@ -14,7 +14,7 @@ variable "cert_issuer_name" {
   description = "The cert-manager certificate issuer name."
 }
 
-variable "grafana_ingress_host" {
+variable "grafana_fqdn" {
   type        = string
   description = "The Grafana hostname placed on ingress"
 }

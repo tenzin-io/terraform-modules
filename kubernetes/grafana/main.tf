@@ -18,7 +18,7 @@ resource "helm_release" "grafana" {
   values = [
     templatefile("${path.module}/templates/values.yaml", {
       grafana_volume_size        = var.grafana_volume_size
-      grafana_ingress_host       = var.grafana_ingress_host
+      grafana_fqdn               = var.grafana_fqdn
       cert_issuer_name           = var.cert_issuer_name
       enable_github_oauth        = var.enable_github_oauth
       github_org_name            = var.github_org_name
