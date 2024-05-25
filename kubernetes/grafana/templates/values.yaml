@@ -5,10 +5,10 @@ ingress:
     nginx.ingress.kubernetes.io/proxy-body-size: 50m
     nginx.ingress.kubernetes.io/backend-protocol: HTTP
   hosts:
-    - ${grafana_ingress_host}
+    - ${grafana_fqdn}
   tls:
   - hosts:
-    - ${grafana_ingress_host}
+    - ${grafana_fqdn}
     secretName: grafana-tls-secret
 
 persistence:
