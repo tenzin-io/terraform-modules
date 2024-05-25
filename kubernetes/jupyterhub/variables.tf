@@ -16,11 +16,13 @@ variable "enable_github_oauth" {
 
 variable "github_oauth_client_id" {
   type        = string
+  default     = null
   description = "The GitHub OAuth client ID."
 }
 
 variable "github_oauth_client_secret" {
   type        = string
+  default     = null
   sensitive   = true
   description = "The GitHub OAuth client secret."
 }
@@ -28,4 +30,5 @@ variable "github_oauth_client_secret" {
 variable "allowed_github_organizations" {
   type        = set(string)
   description = "The list of GitHub organizations that are allowed to access Jupyter Hub."
+  default     = null
 }
