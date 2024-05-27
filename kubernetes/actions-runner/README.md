@@ -13,6 +13,7 @@ A Terraform module to deploy GitHub Actions Runner Controller to my Kubernetes c
 | Name | Type |
 |------|------|
 | [helm_release.actions_runner_controller](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
+| [helm_release.actions_runner_set](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
 
 ## Inputs
 
@@ -25,4 +26,5 @@ A Terraform module to deploy GitHub Actions Runner Controller to my Kubernetes c
 | <a name="input_maximum_runners"></a> [maximum\_runners](#input\_maximum\_runners) | The maximum number of runners to scale to | `number` | `5` | no |
 | <a name="input_minimum_runners"></a> [minimum\_runners](#input\_minimum\_runners) | The minimum number of runners to scale to | `number` | `1` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | The namespace to deploy the actions-runner-controller | `string` | `"actions-runner"` | no |
+| <a name="input_runner_set_name"></a> [runner\_set\_name](#input\_runner\_set\_name) | The name of the runner set | `string` | n/a | yes |
 <!-- END_TF_DOCS -->

@@ -27,6 +27,11 @@ variable "github_app_private_key" {
   sensitive   = true
 }
 
+variable "runner_set_name" {
+  description = "The name of the runner set"
+  type        = string
+}
+
 variable "minimum_runners" {
   description = "The minimum number of runners to scale to"
   type        = number
