@@ -9,35 +9,40 @@ terraform {
 }
 
 resource "helm_release" "actions_runner_controller" {
-  name             = "actions-runner-controller"
+  name             = "self-hosted"
   namespace        = var.namespace
   create_namespace = true
-  repository       = "https://actions-runner-controller.github.io/actions-runner-controller"
-  chart            = "actions-runner-controller"
-  version          = "0.23.7"
+  repository       = "oci://ghcr.io/actions/actions-runner-controller-charts"
+  chart            = "gha-runner-scale-set-controller"
+  version          = "0.9.2"
 
   set {
-    name  = "authSecret.create"
-    value = true
+    name  = "githubConfigUrl"
+    value = var.github_org_url
   }
 
   set {
-    name  = "authSecret.github_app_id"
+    name  = "githubConfigSecret.github_app_id"
     value = var.github_app_id
   }
 
   set {
-    name  = "authSecret.github_app_installation_id"
+    name  = "githubConfigSecret.github_app_installation_id"
     value = var.github_app_installation_id
   }
 
   set {
-    name  = "authSecret.github_app_private_key"
+    name  = "githubConfigSecret.github_app_private_key"
     value = var.github_app_private_key
   }
 
   set {
-    name  = "scope.singleNamespace"
-    value = true
+    name  = "minRunners"
+    value = var.minimum_runners
+  }
+
+  set {
+    name  = "maxRunners"
+    value = var.maximum_runners
   }
 }

@@ -4,6 +4,11 @@ variable "namespace" {
   default     = "actions-runner"
 }
 
+variable "github_org_url" {
+  description = "The GitHub Organization URL"
+  type        = string
+}
+
 variable "github_app_id" {
   description = "The GitHub App ID"
   type        = number
@@ -20,4 +25,16 @@ variable "github_app_private_key" {
   description = "The GitHub App Private Key"
   type        = string
   sensitive   = true
+}
+
+variable "minimum_runners" {
+  description = "The minimum number of runners to scale to"
+  type        = number
+  default     = 1
+}
+
+variable "maximum_runners" {
+  description = "The maximum number of runners to scale to"
+  type        = number
+  default     = 5
 }
