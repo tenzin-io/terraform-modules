@@ -62,6 +62,16 @@ resource "helm_release" "actions_runner_set" {
   }
 
   set {
+    name  = "template.spec.containers[0].name"
+    value = "runner"
+  }
+
+  set {
+    name  = "template.spec.containers[0].command[0]"
+    value = "/home/runner/run.sh"
+  }
+
+  set {
     name  = "template.spec.containers[0].image"
     value = var.runner_image
   }
