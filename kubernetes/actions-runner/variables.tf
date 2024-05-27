@@ -27,6 +27,12 @@ variable "github_app_private_key" {
   sensitive   = true
 }
 
+variable "runner_image" {
+  description = "The image to use for the runner"
+  type        = string
+  default     = "ghcr.io/actions/actions-runner:latest"
+}
+
 variable "runner_set_name" {
   description = "The name of the runner set"
   type        = string

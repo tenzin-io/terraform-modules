@@ -60,4 +60,10 @@ resource "helm_release" "actions_runner_set" {
     name  = "maxRunners"
     value = var.maximum_runners
   }
+
+  set {
+    name  = "template.spec.containers[0].image"
+    value = var.runner_image
+  }
+
 }
