@@ -12,7 +12,7 @@ resource "helm_release" "actions_runner_controller" {
   name             = "actions-runner-controller"
   namespace        = var.namespace
   create_namespace = true
-  repository       = "https://actions-runner-controller.github.io/actions-runner-controller"
+  repository       = "https://actions-runner-controller.github.io/chart"
   chart            = "actions-runner-controller"
   version          = "0.27.6"
 
