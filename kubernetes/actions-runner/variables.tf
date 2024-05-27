@@ -4,7 +4,7 @@ variable "namespace" {
   default     = "actions-runner"
 }
 
-variable "github_org_url" {
+variable "github_organization_url" {
   description = "The GitHub Organization URL"
   type        = string
 }

@@ -28,7 +28,7 @@ resource "helm_release" "actions_runner_set" {
 
   set {
     name  = "githubConfigUrl"
-    value = var.github_org_url
+    value = var.github_organization_url
   }
 
   set {
