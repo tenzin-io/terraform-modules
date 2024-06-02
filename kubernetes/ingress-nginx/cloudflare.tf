@@ -5,7 +5,7 @@ resource "kubernetes_secret_v1" "cloudflare_tunnel_token_secret" {
     namespace = var.namespace
   }
   data = {
-    token = var.cloudflare_tunnel_token
+    tunnelToken = var.cloudflare_tunnel_token
   }
   depends_on = [kubernetes_namespace_v1.nginx_namespace]
 }
