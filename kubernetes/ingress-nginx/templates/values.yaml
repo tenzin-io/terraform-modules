@@ -14,7 +14,7 @@ controller:
   %{~ endif ~}
     %{~ if enable_cloudflare_tunnel ~}
     - name: cloudflared
-      image: "ghcr.io/cloudflare/cloudflared:latest"
+      image: "cloudflare/cloudflared:latest"
       imagePullPolicy: Always
       args:
         - "tunnel"
