@@ -13,7 +13,7 @@ controller:
   extraContainers:
   %{~ endif ~}
     %{~ if enable_cloudflare_tunnel ~}
-    - name: cloudflared
+    - name: cloudflare-sidecar
       image: "cloudflare/cloudflared:latest"
       imagePullPolicy: Always
       args:
