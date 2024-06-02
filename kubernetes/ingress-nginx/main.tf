@@ -35,6 +35,7 @@ resource "helm_release" "ingress_nginx" {
   depends_on = [
     kubernetes_namespace_v1.nginx_namespace,
     kubernetes_role_binding_v1.tailscale_role_binding,
-    kubernetes_secret_v1.tailscale_auth_key_secret
+    kubernetes_secret_v1.tailscale_auth_key_secret,
+    kubernetes_secret_v1.cloudflare_tunnel_token_secret
   ]
 }
