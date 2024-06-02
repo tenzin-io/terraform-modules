@@ -17,6 +17,18 @@ variable "tailscale_auth_key" {
   sensitive   = true
 }
 
+variable "enable_cloudflare_tunnel" {
+  type        = bool
+  description = "Enable Cloudflare tunnel on Nginx controller."
+  default     = false
+}
+
+variable "cloudflare_tunnel_token" {
+  type        = string
+  description = "The Cloudflare tunnel token to join to a Cloudflare network."
+  default     = null
+}
+
 variable "namespace" {
   type        = string
   default     = "ingress-nginx"
