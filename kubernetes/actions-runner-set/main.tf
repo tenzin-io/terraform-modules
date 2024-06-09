@@ -10,7 +10,7 @@ terraform {
 
 resource "helm_release" "actions_runner_set" {
   for_each = toset(var.github_config_urls)
-  name             = "arc-runner-set-${var.runner_set_name}-${md5(each.key)}"
+  name             = substr("arc-runner-set-${var.runner_set_name}-${md5(each.key)}", 0, 53)
   namespace        = var.namespace
   create_namespace = true
   repository       = "oci://ghcr.io/actions/actions-runner-controller-charts"
