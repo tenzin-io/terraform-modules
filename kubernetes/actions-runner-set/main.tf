@@ -9,7 +9,8 @@ terraform {
 }
 
 resource "helm_release" "actions_runner_set" {
-  name             = "arc-runner-set-${var.runner_set_name}"
+  for_each = toset(var.github_config_urls)
+  name             = "arc-runner-set-${var.runner_set_name}-${uuidv5("url", each.key)}"
   namespace        = var.namespace
   create_namespace = true
   repository       = "oci://ghcr.io/actions/actions-runner-controller-charts"
@@ -18,7 +19,7 @@ resource "helm_release" "actions_runner_set" {
 
   set {
     name  = "githubConfigUrl"
-    value = var.github_organization_url
+    value = each.key
   }
 
   set {

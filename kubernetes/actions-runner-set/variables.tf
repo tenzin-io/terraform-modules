@@ -4,9 +4,9 @@ variable "namespace" {
   default     = "actions-runner"
 }
 
-variable "github_organization_url" {
+variable "github_config_urls" {
   description = "The GitHub Organization URL"
-  type        = string
+  type        = set(string)
 }
 
 variable "github_app_id" {
