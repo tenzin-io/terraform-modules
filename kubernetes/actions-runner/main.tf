@@ -9,7 +9,7 @@ terraform {
 }
 
 resource "helm_release" "actions_runner_controller" {
-  name             = "arc"
+  name             = "arc-${var.runner_set_name}-controller"
   namespace        = var.namespace
   create_namespace = true
   repository       = "oci://ghcr.io/actions/actions-runner-controller-charts"
@@ -19,7 +19,7 @@ resource "helm_release" "actions_runner_controller" {
 
 resource "helm_release" "actions_runner_set" {
   depends_on       = [helm_release.actions_runner_controller]
-  name             = "arc-runner-set"
+  name             = "arc-${var.runner_set_name}-runner-set"
   namespace        = var.namespace
   create_namespace = true
   repository       = "oci://ghcr.io/actions/actions-runner-controller-charts"
