@@ -39,7 +39,7 @@ resource "helm_release" "actions_runner_set" {
 
   set {
     name  = "runnerScaleSetName"
-    value = format("%s-%s", var.runner_set_name, replace(each.key, "/", "-"))
+    value = format("%s-%s", var.runner_set_name, replace(basename(each.key), "/", "-"))
   }
 
   set {
