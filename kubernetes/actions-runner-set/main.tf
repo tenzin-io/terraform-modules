@@ -9,7 +9,7 @@ terraform {
 }
 
 resource "helm_release" "actions_runner_set" {
-  for_each = toset(var.github_config_urls)
+  for_each         = toset(var.github_config_urls)
   name             = substr("arc-runner-set-${var.runner_set_name}-${md5(each.key)}", 0, 53)
   namespace        = var.namespace
   create_namespace = true
@@ -39,7 +39,7 @@ resource "helm_release" "actions_runner_set" {
 
   set {
     name  = "runnerScaleSetName"
-    value = var.runner_set_name
+    value = format("%s-%s", var.runner_set_name, replace(each.key, "/", "-"))
   }
 
   set {
