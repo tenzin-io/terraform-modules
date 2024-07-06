@@ -19,6 +19,9 @@ A Terraform module to deploy Nginx Ingresses to resources external of the Kubern
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_external_services"></a> [external\_services](#input\_external\_services) | A map of external services. | <pre>map(object({<br>    address = string<br>    port    = string<br>  }))</pre> | `{}` | no |
+| <a name="input_certificate_issuer"></a> [certificate\_issuer](#input\_certificate\_issuer) | The name of the certificate issuer for the cluster | `string` | `"lets-encrypt"` | no |
+| <a name="input_external_domain_name"></a> [external\_domain\_name](#input\_external\_domain\_name) | The external domain name to append to the service name | `string` | n/a | yes |
+| <a name="input_external_services"></a> [external\_services](#input\_external\_services) | A map of external services | <pre>map(object({<br>    address = string<br>    port    = string<br>  }))</pre> | `{}` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | The namespace to deploy the ingresses for external services. | `string` | `"external-services"` | no |
+| <a name="input_request_body_size"></a> [request\_body\_size](#input\_request\_body\_size) | The maximum size of the request body | `string` | `"100m"` | no |
 <!-- END_TF_DOCS -->

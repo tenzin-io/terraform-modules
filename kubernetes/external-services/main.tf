@@ -24,6 +24,21 @@ resource "helm_release" "external_service" {
   }
 
   set {
+    name  = "domainName"
+    value = var.external_domain_name
+  }
+
+  set {
+    name  = "certificateIssuer"
+    value = var.certificate_issuer
+  }
+
+  set {
+    name  = "bodySize"
+    value = var.request_body_size
+  }
+
+  set {
     name  = "originServer.address"
     value = each.value.address
   }
