@@ -11,6 +11,22 @@ terraform {
     }
   }
 }
+
+resource "helm_release" "nvidia_gpu_operator_config" {
+  name             = "nvidia-config"
+  namespace        = var.namespace
+  create_namespace = false
+  repository       = "oci://ghcr.io/tenzin-io"
+  chart            = "nvidia-gpu-operator-config"
+  version          = "v0.0.0"
+  wait             = true
+
+  set {
+    name  = "gpu_slices"
+    value = var.gpu_slices
+  }
+}
+
 resource "helm_release" "nvidia_gpu_operator" {
   name             = "nvidia"
   chart            = "gpu-operator"
@@ -34,27 +50,5 @@ resource "helm_release" "nvidia_gpu_operator" {
     value = "any"
   }
 
-  depends_on = [kubernetes_config_map_v1.time_slicing_config]
-}
-
-resource "kubernetes_config_map_v1" "time_slicing_config" {
-  metadata {
-    name      = "time-slicing-config"
-    namespace = var.namespace
-  }
-
-  data = {
-    any = <<-EOT
-      version: v1
-      flags:
-        migStrategy: none
-      sharing:
-        timeSlicing:
-          renameByDefault: false
-          failRequestsGreaterThanOne: false
-          resources:
-            - name: nvidia.com/gpu
-              replicas: ${var.gpu_slices}
-    EOT
-  }
+  depends_on = [helm_release.nvidia_gpu_operator_config]
 }
