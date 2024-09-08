@@ -1,4 +1,4 @@
-variable "nvidia_gpu_slices" {
+variable "gpu_slices" {
   type        = number
   default     = 8
   description = "The number of GPU slices"

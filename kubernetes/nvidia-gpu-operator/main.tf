@@ -52,7 +52,7 @@ resource "kubernetes_config_map_v1" "time_slicing_config" {
           failRequestsGreaterThanOne: false
           resources:
             - name: nvidia.com/gpu
-              replicas: ${var.nvidia_gpu_slices}
+              replicas: ${var.gpu_slices}
     EOT
     )
   }
