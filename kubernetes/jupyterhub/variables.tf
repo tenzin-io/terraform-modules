@@ -32,3 +32,11 @@ variable "allowed_github_organizations" {
   description = "The list of GitHub organizations that are allowed to access Jupyter Hub."
   default     = null
 }
+
+variable "jupyter_image_name" {
+  default = "quay.io/jupyter/pytorch-notebook"
+}
+
+variable "jupyter_image_tag" {
+  default = "cuda12-python-3.11"
+}

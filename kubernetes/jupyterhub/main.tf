@@ -25,4 +25,15 @@ resource "helm_release" "jupyterhub" {
       cert_issuer_name             = var.cert_issuer_name,
     })
   ]
+
+  set {
+    name  = "singleuser.image.name"
+    value = var.jupyter_image_name
+  }
+
+  set {
+    name  = "singleuser.image.tag"
+    value = var.jupyter_image_tag
+  }
+
 }
