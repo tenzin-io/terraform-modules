@@ -22,7 +22,7 @@ resource "helm_release" "cert_manager_config" {
   version          = "v0.0.2"
   wait             = true
 
-  set {
+  set_sensitive {
     name  = "cloudflare.apiToken"
     value = var.cloudflare_api_token
   }
