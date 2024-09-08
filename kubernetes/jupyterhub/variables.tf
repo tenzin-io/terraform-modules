@@ -1,4 +1,5 @@
 variable "jupyterhub_fqdn" {
+  default     = "jupyterhub.lan"
   type        = string
   description = "The fully qualified name of Jupyter Hub instance."
 }
@@ -45,8 +46,14 @@ variable "jupyter_image_tag" {
   description = "The Jupyter notebook image tag to use"
 }
 
-variable "nvidia_gpu_enabled" {
+variable "enable_nvidia_gpu" {
   type        = bool
   default     = false
   description = "The Jupyter notebook requests GPU resources"
+}
+
+variable "enable_ingress" {
+  type        = bool
+  default     = false
+  description = "Create JupyterHub ingress"
 }
