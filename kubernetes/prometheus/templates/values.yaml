@@ -118,10 +118,10 @@ prometheus:
     hosts:
       - ${prometheus_fqdn}
     annotations:
-      cert-manager.io/cluster-issuer: ${cert_issuer_name}
+      # cert-manager.io/cluster-issuer: ${cert_issuer_name}
       nginx.ingress.kubernetes.io/proxy-body-size: 50m
       nginx.ingress.kubernetes.io/backend-protocol: HTTP
-    tls:
-    - hosts:
-      - ${prometheus_fqdn}
-      secretName: prometheus-tls-secret
+    # tls:
+    # - hosts:
+    #   - ${prometheus_fqdn}
+    #   secretName: prometheus-tls-secret
