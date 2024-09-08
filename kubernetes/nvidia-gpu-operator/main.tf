@@ -33,6 +33,8 @@ resource "helm_release" "nvidia_gpu_operator" {
     name  = "devicePlugin.config.default"
     value = "any"
   }
+
+  depends_on = [kubernetes_config_map_v1.time_slicing_config]
 }
 
 resource "kubernetes_config_map_v1" "time_slicing_config" {
