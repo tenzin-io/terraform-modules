@@ -44,7 +44,7 @@ resource "kubernetes_config_map_v1" "time_slicing_config" {
   }
 
   data = {
-    any = yamlencode(<<-EOT
+    any = <<-EOT
       version: v1
       flags:
         migStrategy: none
@@ -56,6 +56,5 @@ resource "kubernetes_config_map_v1" "time_slicing_config" {
             - name: nvidia.com/gpu
               replicas: ${var.gpu_slices}
     EOT
-    )
   }
 }
