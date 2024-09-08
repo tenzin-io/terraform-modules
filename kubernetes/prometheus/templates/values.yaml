@@ -120,3 +120,8 @@ prometheus:
     annotations:
       nginx.ingress.kubernetes.io/proxy-body-size: 50m
       nginx.ingress.kubernetes.io/backend-protocol: HTTP
+%{~ if enable_basic_auth == true ~}
+      nginx.ingress.kubernetes.io/auth-type: basic
+      nginx.ingress.kubernetes.io/auth-secret: basic-auth
+      nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
+%{~ endif ~}

@@ -70,3 +70,14 @@ variable "enable_ingress" {
   default     = false
   description = "Create a Prometheus ingress."
 }
+
+variable "enable_basic_auth" {
+  type        = bool
+  default     = false
+  description = "Protect ingress using basic auth."
+}
+
+variable "basic_auth_password" {
+  type        = string
+  description = "The basic auth credentials."
+}

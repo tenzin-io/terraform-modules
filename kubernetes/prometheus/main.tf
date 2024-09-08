@@ -27,6 +27,7 @@ resource "helm_release" "prometheus" {
       kubernetes_cluster_name    = var.kubernetes_cluster_name
       prometheus_fqdn            = var.prometheus_fqdn
       enable_ingress             = var.enable_ingress
+      enable_basic_auth          = var.enable_basic_auth
     })
   ]
 }
@@ -51,4 +52,16 @@ resource "helm_release" "metrics_server" {
     name  = "args"
     value = "{--kubelet-insecure-tls}"
   }
+}
+
+resource "kubernetes_secret_v1" "basic_auth" {
+  count = var.enable_basic_auth ? 1 : 0
+  metadata {
+    name      = "basic-auth"
+    namespace = var.namespace
+  }
+  data = {
+    auth = var.basic_auth_password
+  }
+  depends_on = [helm_release.prometheus]
 }
