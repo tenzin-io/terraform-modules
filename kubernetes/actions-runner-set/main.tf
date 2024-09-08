@@ -22,17 +22,17 @@ resource "helm_release" "actions_runner_set" {
     value = each.key
   }
 
-  set {
+  set_sensitive {
     name  = "githubConfigSecret.github_app_id"
     value = var.github_app_id
   }
 
-  set {
+  set_sensitive {
     name  = "githubConfigSecret.github_app_installation_id"
     value = var.github_app_installation_id
   }
 
-  set {
+  set_sensitive {
     name  = "githubConfigSecret.github_app_private_key"
     value = var.github_app_private_key
   }
