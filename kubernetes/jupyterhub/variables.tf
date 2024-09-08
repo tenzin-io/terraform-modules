@@ -6,6 +6,7 @@ variable "jupyterhub_fqdn" {
 
 variable "cert_issuer_name" {
   type        = string
+  default     = "lets-encrypt"
   description = "The name of the cert-manager certificate issuer"
 }
 
