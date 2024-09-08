@@ -15,18 +15,18 @@ persistence:
   enabled: true
   size: ${grafana_volume_size}
 
-datasources:
-  datasource.yaml:
-    apiVersion: 1
-    datasources:
-      - name: Prometheus
-        type: prometheus
-        access: proxy
-        url: http://prometheus-kube-prometheus-prometheus:9090
-        jsonData:
-          manageAlerts: false
-          prometheusType: Prometheus
-          prometheusVersion: '0.73.2'
+# datasources:
+#   datasource.yaml:
+#     apiVersion: 1
+#     datasources:
+#       - name: Prometheus
+#         type: prometheus
+#         access: proxy
+#         url: http://prometheus-kube-prometheus-prometheus:9090
+#         jsonData:
+#           manageAlerts: false
+#           prometheusType: Prometheus
+#           prometheusVersion: '0.73.2'
 
 %{~ if enable_github_oauth ~}
 envFromSecret: ${github_oauth_secret_name}
