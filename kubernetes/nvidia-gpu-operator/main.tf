@@ -18,11 +18,11 @@ resource "helm_release" "nvidia_gpu_operator_config" {
   create_namespace = false
   repository       = "oci://ghcr.io/tenzin-io"
   chart            = "nvidia-gpu-operator-config"
-  version          = "v0.0.0"
+  version          = "v0.0.6"
   wait             = true
 
   set {
-    name  = "gpu_slices"
+    name  = "gpuSlices"
     value = var.gpu_slices
   }
 }
