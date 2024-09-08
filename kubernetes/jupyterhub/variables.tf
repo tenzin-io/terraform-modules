@@ -34,9 +34,19 @@ variable "allowed_github_organizations" {
 }
 
 variable "jupyter_image_name" {
-  default = "quay.io/jupyter/pytorch-notebook"
+  type        = string
+  default     = "quay.io/jupyterhub/k8s-singleuser-sample"
+  description = "The Jupyter notebook image to use"
 }
 
 variable "jupyter_image_tag" {
-  default = "cuda12-python-3.11"
+  type        = string
+  default     = "3.3.7"
+  description = "The Jupyter notebook image tag to use"
+}
+
+variable "nvidia_gpu_enabled" {
+  type        = bool
+  default     = false
+  description = "The Jupyter notebook requests GPU resources"
 }

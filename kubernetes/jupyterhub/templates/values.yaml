@@ -43,3 +43,8 @@ ingress:
 proxy:
   service:
     type: ClusterIP
+
+singleuser:
+  extraResource:
+    limits:
+      nvidia.com/gpu: ${gpu_count}

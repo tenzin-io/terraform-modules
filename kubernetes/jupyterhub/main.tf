@@ -23,6 +23,7 @@ resource "helm_release" "jupyterhub" {
       github_oauth_client_secret   = var.github_oauth_client_secret,
       allowed_github_organizations = var.allowed_github_organizations,
       cert_issuer_name             = var.cert_issuer_name,
+      gpu_count                    = var.nvidia_gpu_enabled ? 1 : 0,
     })
   ]
 
