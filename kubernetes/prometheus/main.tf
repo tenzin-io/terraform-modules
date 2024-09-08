@@ -25,7 +25,6 @@ resource "helm_release" "prometheus" {
       metrics_retention_duration = var.metrics_retention_duration
       metrics_scrape_interval    = var.metrics_scrape_interval
       kubernetes_cluster_name    = var.kubernetes_cluster_name
-      cert_issuer_name           = var.cert_issuer_name
       prometheus_fqdn            = var.prometheus_fqdn
     })
   ]

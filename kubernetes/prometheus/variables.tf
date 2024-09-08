@@ -63,8 +63,3 @@ variable "prometheus_fqdn" {
   type        = string
   description = "The Prometheus DNS name to place on ingress."
 }
-
-variable "cert_issuer_name" {
-  type        = string
-  description = "The name of the certificate issuer in the cluster."
-}
