@@ -46,9 +46,3 @@ variable "nginx_service_account_name" {
   default     = "ingress-nginx"
   description = "The service account name for Nginx ingress controller."
 }
-
-variable "basic_auth_password" {
-  type        = string
-  sensitive   = true
-  description = "The basic auth secret that can be used for ingresses."
-}

@@ -6,22 +6,12 @@ Useful Nginx ingress tuning and setup:
 - <https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md>
 
 <!-- BEGIN_TF_DOCS -->
-
-
-## Resources
-
-| Name | Type |
-|------|------|
-| [helm_release.ingress_nginx](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
-| [kubernetes_namespace_v1.nginx_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace_v1) | resource |
-| [kubernetes_role_binding_v1.tailscale_role_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/role_binding_v1) | resource |
-| [kubernetes_role_v1.tailscale_role](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/role_v1) | resource |
-| [kubernetes_secret_v1.tailscale_auth_key_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret_v1) | resource |
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_cloudflare_tunnel_token"></a> [cloudflare\_tunnel\_token](#input\_cloudflare\_tunnel\_token) | The Cloudflare tunnel token to join to a Cloudflare network. | `string` | `null` | no |
+| <a name="input_enable_cloudflare_tunnel"></a> [enable\_cloudflare\_tunnel](#input\_enable\_cloudflare\_tunnel) | Enable Cloudflare tunnel on Nginx controller. | `bool` | `false` | no |
 | <a name="input_enable_tailscale_tunnel"></a> [enable\_tailscale\_tunnel](#input\_enable\_tailscale\_tunnel) | Enable Tailscale tunnel on Nginx controller. | `bool` | `false` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | The namespace to deploy Nginx. | `string` | `"ingress-nginx"` | no |
 | <a name="input_nginx_service_account_name"></a> [nginx\_service\_account\_name](#input\_nginx\_service\_account\_name) | The service account name for Nginx ingress controller. | `string` | `"ingress-nginx"` | no |

@@ -39,14 +39,3 @@ resource "helm_release" "ingress_nginx" {
     kubernetes_secret_v1.cloudflare_tunnel_token_secret
   ]
 }
-
-resource "kubernetes_secret_v1" "basic_auth" {
-  metadata {
-    name      = "basic-auth"
-    namespace = var.namespace
-  }
-  data = {
-    auth = var.basic_auth_password
-  }
-  depends_on = [kubernetes_namespace_v1.nginx_namespace]
-}
