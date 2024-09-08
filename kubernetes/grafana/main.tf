@@ -44,6 +44,7 @@ resource "helm_release" "grafana" {
       enable_github_oauth         = var.enable_github_oauth
       allowed_github_organization = var.allowed_github_organization
       github_oauth_secret_name    = local.github_oauth_secret_name
+      enable_ingress              = var.enable_ingress
     })
   ]
 }

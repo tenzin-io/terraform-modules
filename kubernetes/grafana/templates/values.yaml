@@ -1,5 +1,5 @@
 ingress:
-  enabled: true
+  enabled: ${enable_ingress}
   annotations:
     cert-manager.io/cluster-issuer: ${cert_issuer_name}
     nginx.ingress.kubernetes.io/proxy-body-size: 50m
