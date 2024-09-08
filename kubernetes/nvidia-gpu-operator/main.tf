@@ -15,7 +15,7 @@ terraform {
 resource "helm_release" "nvidia_gpu_operator_config" {
   name             = "nvidia-config"
   namespace        = var.namespace
-  create_namespace = false
+  create_namespace = true
   repository       = "oci://ghcr.io/tenzin-io"
   chart            = "nvidia-gpu-operator-config"
   version          = "v0.0.6"
@@ -32,7 +32,7 @@ resource "helm_release" "nvidia_gpu_operator" {
   chart            = "gpu-operator"
   version          = "v24.6.1"
   repository       = "https://helm.ngc.nvidia.com/nvidia"
-  create_namespace = true
+  create_namespace = false
   namespace        = var.namespace
 
   set {
