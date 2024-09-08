@@ -26,6 +26,7 @@ resource "helm_release" "prometheus" {
       metrics_scrape_interval    = var.metrics_scrape_interval
       kubernetes_cluster_name    = var.kubernetes_cluster_name
       prometheus_fqdn            = var.prometheus_fqdn
+      enable_ingress             = var.enable_ingress
     })
   ]
 }

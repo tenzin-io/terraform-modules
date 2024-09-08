@@ -60,6 +60,13 @@ variable "kubernetes_cluster_name" {
 }
 
 variable "prometheus_fqdn" {
+  default     = "prometheus.lan"
   type        = string
   description = "The Prometheus DNS name to place on ingress."
+}
+
+variable "enable_ingress" {
+  type        = bool
+  default     = false
+  description = "Create a Prometheus ingress."
 }
