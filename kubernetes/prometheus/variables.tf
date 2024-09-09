@@ -79,5 +79,6 @@ variable "enable_basic_auth" {
 
 variable "basic_auth_password" {
   type        = string
+  default     = null
   description = "The basic auth credentials."
 }
