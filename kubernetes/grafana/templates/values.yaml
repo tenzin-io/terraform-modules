@@ -34,6 +34,7 @@ envFromSecret: ${github_oauth_secret_name}
 
 grafana.ini:
   server:
+    domain: ${grafana_fqdn}
     root_url: "https://%(domain)s"
 
   users:
