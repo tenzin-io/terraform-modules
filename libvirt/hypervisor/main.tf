@@ -8,12 +8,12 @@ terraform {
 }
 
 resource "libvirt_network" "network" {
-  name      = var.network_name
+  name      = var.vm_network_name
   mode      = "route"
   bridge    = "virbr1"
   autostart = true
-  domain    = var.domain_name
-  addresses = [var.network_cidr]
+  domain    = var.vm_domain_name
+  addresses = [var.vm_network_cidr]
 
   dhcp {
     enabled = true
@@ -26,11 +26,11 @@ resource "libvirt_network" "network" {
     // reserved hosts
     hosts {
       hostname = "gateway"
-      ip       = cidrhost(var.network_cidr, 1)
+      ip       = cidrhost(var.vm_network_cidr, 1)
     }
     hosts {
       hostname = "metallb"
-      ip       = cidrhost(var.network_cidr, 254)
+      ip       = cidrhost(var.vm_network_cidr, 254)
     }
   }
 
@@ -41,17 +41,17 @@ resource "libvirt_network" "network" {
 
     options {
       option_name  = "local"
-      option_value = "/${var.domain_name}/"
+      option_value = "/${var.vm_domain_name}/"
     }
 
     options {
       option_name  = "listen-address"
-      option_value = "${cidrhost(var.network_cidr, 1)},${var.hypervisor_ip}"
+      option_value = "${cidrhost(var.vm_network_cidr, 1)},${var.hypervisor_ip}"
     }
 
     options {
       option_name  = "dhcp-option"
-      option_value = "option:domain-search,${var.domain_name}"
+      option_value = "option:domain-search,${var.vm_domain_name}"
     }
   }
 }

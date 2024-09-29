@@ -1,12 +1,12 @@
-variable "network_cidr" {
+variable "vm_network_cidr" {
   type = string
 }
 
-variable "domain_name" {
+variable "vm_domain_name" {
   type = string
 }
 
-variable "network_name" {
+variable "vm_network_name" {
   type    = string
   default = "vm-network"
 }
