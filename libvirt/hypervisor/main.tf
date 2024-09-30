@@ -64,11 +64,6 @@ resource "libvirt_network" "network" {
       option_name  = "dhcp-option"
       option_value = "option:domain-search,${var.vm_domain_name}"
     }
-
-    # options {
-    #   option_name  = "cname"
-    #   option_value = "prometheus.${var.vm_domain_name},metallb.${var.vm_domain_name}"
-    # }
   }
 }
 
