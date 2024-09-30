@@ -38,6 +38,11 @@ resource "libvirt_network" "network" {
       hostname = "metallb"
       ip       = cidrhost(var.vm_network_cidr, 254)
     }
+
+    hosts {
+      hostname = "prometheus"
+      ip       = cidrhost(var.vm_network_cidr, 254)
+    }
   }
 
   dnsmasq_options {
@@ -60,10 +65,10 @@ resource "libvirt_network" "network" {
       option_value = "option:domain-search,${var.vm_domain_name}"
     }
 
-    options {
-      option_name  = "cname"
-      option_value = "prometheus.${var.vm_domain_name},metallb.${var.vm_domain_name}"
-    }
+    # options {
+    #   option_name  = "cname"
+    #   option_value = "prometheus.${var.vm_domain_name},metallb.${var.vm_domain_name}"
+    # }
   }
 }
 
