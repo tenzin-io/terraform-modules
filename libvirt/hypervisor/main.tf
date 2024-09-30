@@ -62,7 +62,7 @@ resource "libvirt_network" "network" {
 
     options {
       option_name  = "cname"
-      option_value = "prometheus,metallb"
+      option_value = "prometheus.${var.vm_domain_name},metallb.${var.vm_domain_name}"
     }
   }
 }
