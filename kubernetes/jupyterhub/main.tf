@@ -15,6 +15,7 @@ resource "helm_release" "jupyterhub" {
   version          = "3.3.7"
   namespace        = "jupyterhub"
   create_namespace = true
+  timeout          = 30 * 60 // minutes
   values = [
     templatefile("${path.module}/templates/values.yaml", {
       jupyterhub_fqdn              = var.jupyterhub_fqdn,
