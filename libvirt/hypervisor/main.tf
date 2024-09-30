@@ -28,6 +28,12 @@ resource "libvirt_network" "network" {
       hostname = "gateway"
       ip       = cidrhost(var.vm_network_cidr, 1)
     }
+
+    hosts {
+      hostname = "cluster"
+      ip       = cidrhost(var.vm_network_cidr, 250)
+    }
+
     hosts {
       hostname = "metallb"
       ip       = cidrhost(var.vm_network_cidr, 254)
