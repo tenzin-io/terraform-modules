@@ -39,7 +39,9 @@ resource "libvirt_domain" "machine" {
   }
 
   xml {
-    xslt = file("${path.module}/files/cdrom-model.xslt")
+    xslt = var.gpu_pci_bus == null ? file("${path.module}/files/base-transform.xsl") : templatefile("${path.module}/templates/gpu-transform.xsl", {
+      gpu_pci_bus = var.gpu_pci_bus
+    })
   }
 
   console {
