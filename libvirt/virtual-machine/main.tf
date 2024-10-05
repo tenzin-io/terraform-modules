@@ -62,4 +62,8 @@ resource "libvirt_domain" "machine" {
   disk {
     volume_id = libvirt_volume.root_disk.id
   }
+
+  lifecycle {
+    ignore_changes = ["cloudinit"]
+  }
 }
