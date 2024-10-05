@@ -23,25 +23,17 @@ resource "libvirt_network" "network" {
     enabled    = true
     local_only = false
 
+    dynamic "hosts" {
+      for_each = toset(var.dns_host_records)
+      content {
+        hostname = hosts.value.hostname
+        ip       = hosts.value.ip
+      }
+    }
     // reserved hosts
     hosts {
       hostname = "gateway"
       ip       = cidrhost(var.vm_network_cidr, 1)
-    }
-
-    hosts {
-      hostname = "cluster"
-      ip       = cidrhost(var.vm_network_cidr, 250)
-    }
-
-    hosts {
-      hostname = "metallb"
-      ip       = cidrhost(var.vm_network_cidr, 254)
-    }
-
-    hosts {
-      hostname = "prometheus"
-      ip       = cidrhost(var.vm_network_cidr, 254)
     }
   }
 

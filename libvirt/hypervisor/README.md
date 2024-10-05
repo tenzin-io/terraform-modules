@@ -5,6 +5,7 @@ A Terraform module to help setup a libvirtd hypervisor host with the base VM inf
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_dns_host_records"></a> [dns\_host\_records](#input\_dns\_host\_records) | A list of host records to create in the virtual domain | `list(object({ hostname = string, ip = string }))` | `[]` | no |
 | <a name="input_hypervisor_ip"></a> [hypervisor\_ip](#input\_hypervisor\_ip) | The hypervisor IP address | `string` | n/a | yes |
 | <a name="input_vm_domain_name"></a> [vm\_domain\_name](#input\_vm\_domain\_name) | The domain name of the VM network | `string` | n/a | yes |
 | <a name="input_vm_network_cidr"></a> [vm\_network\_cidr](#input\_vm\_network\_cidr) | The VM network CIDR block | `string` | n/a | yes |

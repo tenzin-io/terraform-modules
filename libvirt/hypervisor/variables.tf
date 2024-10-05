@@ -18,3 +18,9 @@ variable "hypervisor_ip" {
   type        = string
   description = "The hypervisor IP address"
 }
+
+variable "dns_host_records" {
+  type        = list(object({ hostname = string, ip = string }))
+  default     = []
+  description = "A list of host records to create in the virtual domain"
+}
