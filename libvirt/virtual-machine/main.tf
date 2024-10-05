@@ -64,6 +64,8 @@ resource "libvirt_domain" "machine" {
   }
 
   lifecycle {
-    ignore_changes = ["cloudinit"]
+    ignore_changes = [
+      cloudinit
+    ]
   }
 }
