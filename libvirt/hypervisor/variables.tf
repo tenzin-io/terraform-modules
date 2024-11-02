@@ -20,7 +20,10 @@ variable "hypervisor_ip" {
 }
 
 variable "dns_host_records" {
-  type        = list(object({ hostname = string, host_number = string }))
+  type = list(object({
+    hostname    = string
+    host_number = string
+  }))
   default     = []
   description = "A list of host records to create in the virtual domain"
 }
