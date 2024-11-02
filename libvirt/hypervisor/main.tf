@@ -27,7 +27,7 @@ resource "libvirt_network" "network" {
       for_each = toset(var.dns_host_records)
       content {
         hostname = hosts.value.hostname
-        ip       = hosts.value.ip
+        ip       = cidrhost(var.vm_network_cidr, hosts.value.host_number)
       }
     }
     // reserved hosts
