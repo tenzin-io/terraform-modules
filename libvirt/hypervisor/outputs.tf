@@ -8,6 +8,11 @@ output "network_id" {
   description = "The VM network id"
 }
 
+output "vm_network_cidr" {
+  value       = var.vm_network_cidr
+  description = "The VM network CIDR"
+}
+
 output "datastore_id" {
   value       = libvirt_pool.datastore.id
   description = "The datastore id"

@@ -5,7 +5,7 @@ A Terraform module to help setup a libvirtd hypervisor host with the base VM inf
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_dns_host_records"></a> [dns\_host\_records](#input\_dns\_host\_records) | A list of host records to create in the virtual domain | `list(object({ hostname = string, host_number = string }))` | `[]` | no |
+| <a name="input_dns_host_records"></a> [dns\_host\_records](#input\_dns\_host\_records) | A list of host records to create in the virtual domain | <pre>list(object({<br>    hostname    = string<br>    host_number = string<br>  }))</pre> | `[]` | no |
 | <a name="input_hypervisor_ip"></a> [hypervisor\_ip](#input\_hypervisor\_ip) | The hypervisor IP address | `string` | n/a | yes |
 | <a name="input_vm_domain_name"></a> [vm\_domain\_name](#input\_vm\_domain\_name) | The domain name of the VM network | `string` | n/a | yes |
 | <a name="input_vm_network_cidr"></a> [vm\_network\_cidr](#input\_vm\_network\_cidr) | The VM network CIDR block | `string` | n/a | yes |
@@ -19,4 +19,5 @@ A Terraform module to help setup a libvirtd hypervisor host with the base VM inf
 | <a name="output_datastore_id"></a> [datastore\_id](#output\_datastore\_id) | The datastore id |
 | <a name="output_datastore_name"></a> [datastore\_name](#output\_datastore\_name) | The datastore name |
 | <a name="output_network_id"></a> [network\_id](#output\_network\_id) | The VM network id |
+| <a name="output_vm_network_cidr"></a> [vm\_network\_cidr](#output\_vm\_network\_cidr) | The VM network CIDR |
 <!-- END_TF_DOCS -->
