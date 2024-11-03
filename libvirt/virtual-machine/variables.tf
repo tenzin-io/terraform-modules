@@ -52,6 +52,6 @@ variable "data_disks" {
   type = map(object({
     disk_size_mib = number
   }))
-  default     = null
+  default     = {}
   description = "A map of data disks to add to the virtual machine"
 }
