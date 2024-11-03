@@ -18,6 +18,11 @@ resource "helm_release" "local_path_provisioner" {
   }
 
   set {
+    name  = "nodePathMap[0].node"
+    value = "DEFAULT_PATH_FOR_NON_LISTED_NODES"
+  }
+
+  set {
     name  = "nodePathMap[0].paths[0]"
     value = var.local_path
   }
