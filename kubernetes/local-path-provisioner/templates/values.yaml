@@ -1,5 +1,0 @@
-image:
-  tag: ${image_tag}
-
-storageClass:
-  defaultClass: true

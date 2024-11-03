@@ -4,9 +4,21 @@ resource "helm_release" "local_path_provisioner" {
   create_namespace = false
   repository       = "oci://ghcr.io/tenzin-io"
   chart            = "local-path-provisioner"
-  version          = "v0.0.26"
+  version          = "v0.0.30"
   wait             = true
-  values = [templatefile("${path.module}/templates/values.yaml", {
-    image_tag = "v0.0.26"
-  })]
+
+  set {
+    name  = "image.tag"
+    value = "v0.0.26"
+  }
+
+  set {
+    name  = "storageClass.defaultClass"
+    value = var.default_storage_class
+  }
+
+  set {
+    name  = "nodePathMap[0].paths[0]"
+    value = var.node_local_data_path
+  }
 }
