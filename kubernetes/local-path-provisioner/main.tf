@@ -19,6 +19,6 @@ resource "helm_release" "local_path_provisioner" {
 
   set {
     name  = "nodePathMap[0].paths[0]"
-    value = var.node_local_data_path
+    value = var.local_path
   }
 }
