@@ -9,7 +9,7 @@ resource "helm_release" "local_path_provisioner" {
 
   set {
     name  = "image.tag"
-    value = "v0.0.26"
+    value = "v0.0.30"
   }
 
   set {
