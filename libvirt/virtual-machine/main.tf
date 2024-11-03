@@ -25,6 +25,13 @@ resource "libvirt_volume" "root_disk" {
   pool           = var.datastore_name
 }
 
+resource "libvirt_volume" "data_disk" {
+  for_each = var.data_disks
+  name     = "${var.name}-${each.key}-disk.qcow2"
+  size     = each.value.disk_size_mib * 1024 * 1024 // size must be in bytes
+  pool     = var.datastore_name
+}
+
 resource "libvirt_domain" "machine" {
   name   = var.name
   memory = var.memory_size_mib
@@ -61,6 +68,13 @@ resource "libvirt_domain" "machine" {
   cloudinit = libvirt_cloudinit_disk.cloudinit_iso.id
   disk {
     volume_id = libvirt_volume.root_disk.id
+  }
+
+  dynamic "disk" {
+    for_each = var.data_disks
+    content {
+      volume_id = libvirt_volume.data_disk[disk.key].id
+    }
   }
 
   lifecycle {

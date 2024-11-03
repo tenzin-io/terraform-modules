@@ -48,3 +48,10 @@ variable "gpu_pci_bus" {
   description = "The PCI bus number of the GPU device"
 }
 
+variable "data_disks" {
+  type = map(object({
+    disk_size_mib = number
+  }))
+  default     = null
+  description = "A map of data disks to add to the virtual machine"
+}
