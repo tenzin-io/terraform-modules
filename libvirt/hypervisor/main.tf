@@ -13,7 +13,7 @@ resource "libvirt_network" "network" {
   bridge    = "virbr1"
   autostart = true
   domain    = var.vm_domain_name
-  addresses = [var.vm_network_cidr]
+  addresses = [cidrsubnet(var.vm_network_cidr, 1, 0)]
 
   dhcp {
     enabled = true
