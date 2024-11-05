@@ -56,6 +56,11 @@ resource "libvirt_network" "network" {
       option_name  = "dhcp-option"
       option_value = "option:domain-search,${var.vm_domain_name}"
     }
+
+    options {
+      option_name  = "dhcp-range"
+      option_value = "${cidrhost(var.vm_network_cidr, 10)},${cidrhost(var.vm_network_cidr, 150)},${cidrnetmask(var.vm_network_cidr)}"
+    }
   }
 }
 
