@@ -50,7 +50,9 @@ variable "gpu_pci_bus" {
 
 variable "data_disks" {
   type = map(object({
+    mount_path    = string
     disk_size_mib = number
+    fs_type       = optional(string, "ext4")
   }))
   default     = {}
   description = "A map of data disks to add to the virtual machine"

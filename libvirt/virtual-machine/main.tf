@@ -13,6 +13,7 @@ resource "libvirt_cloudinit_disk" "cloudinit_iso" {
     hostname                  = var.name
     domain_name               = var.domain_name
     install_nvidia_gpu_driver = var.gpu_pci_bus == null ? false : true
+    data_disks                = var.data_disks
   })
   pool = var.datastore_name
 }
@@ -27,7 +28,7 @@ resource "libvirt_volume" "root_disk" {
 
 resource "libvirt_volume" "data_disk" {
   for_each = var.data_disks
-  name     = "${var.name}-${each.key}-disk.qcow2"
+  name     = "${var.name}-${basename(each.key)}-disk.qcow2"
   size     = each.value.disk_size_mib * 1024 * 1024 // size must be in bytes
   pool     = var.datastore_name
 }
