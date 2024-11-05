@@ -19,7 +19,6 @@ A Terraform module to help setup a libvirtd hypervisor host with the base VM inf
 
 | Name | Description |
 |------|-------------|
-| <a name="output_base_volume_id"></a> [base\_volume\_id](#output\_base\_volume\_id) | The base OS volume id |
 | <a name="output_datastore_id"></a> [datastore\_id](#output\_datastore\_id) | The datastore id |
 | <a name="output_datastore_name"></a> [datastore\_name](#output\_datastore\_name) | The datastore name |
 | <a name="output_network_id"></a> [network\_id](#output\_network\_id) | The VM network id |
