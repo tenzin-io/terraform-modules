@@ -10,7 +10,6 @@ terraform {
 resource "libvirt_network" "network" {
   name      = var.vm_network_name
   mode      = "route"
-  bridge    = "virbr-${var.vm_network_name}"
   autostart = true
   domain    = var.vm_domain_name
   addresses = [var.vm_network_cidr]
