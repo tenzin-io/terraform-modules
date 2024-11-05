@@ -19,6 +19,13 @@ resource "libvirt_network" "network" {
     enabled = true
   }
 
+  xml {
+    xslt = templatefile("${path.module}/templates/network.xslt", {
+      dhcp_range_start = cidrhost(var.vm_network_cidr, var.dhcp_range_start)
+      dhcp_range_end   = cidrhost(var.vm_network_cidr, var.dhcp_range_end)
+    })
+  }
+
   dns {
     enabled    = true
     local_only = false
@@ -57,10 +64,6 @@ resource "libvirt_network" "network" {
       option_value = "option:domain-search,${var.vm_domain_name}"
     }
 
-    options {
-      option_name  = "dhcp-range"
-      option_value = "${cidrhost(var.vm_network_cidr, 10)},${cidrhost(var.vm_network_cidr, 150)},${cidrnetmask(var.vm_network_cidr)}"
-    }
   }
 }
 

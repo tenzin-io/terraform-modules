@@ -27,3 +27,15 @@ variable "dns_host_records" {
   default     = []
   description = "A list of host records to create in the virtual domain"
 }
+
+variable "dhcp_range_start" {
+  type        = number
+  default     = 10
+  description = "The start host number of the DHCP range"
+}
+
+variable "dhcp_range_end" {
+  type        = number
+  default     = 150
+  description = "The end host number of the DHCP range"
+}

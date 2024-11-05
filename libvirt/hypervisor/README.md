@@ -5,6 +5,8 @@ A Terraform module to help setup a libvirtd hypervisor host with the base VM inf
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_dhcp_range_end"></a> [dhcp\_range\_end](#input\_dhcp\_range\_end) | The end host number of the DHCP range | `number` | `150` | no |
+| <a name="input_dhcp_range_start"></a> [dhcp\_range\_start](#input\_dhcp\_range\_start) | The start host number of the DHCP range | `number` | `10` | no |
 | <a name="input_dns_host_records"></a> [dns\_host\_records](#input\_dns\_host\_records) | A list of host records to create in the virtual domain | <pre>list(object({<br>    hostname    = string<br>    host_number = string<br>  }))</pre> | `[]` | no |
 | <a name="input_hypervisor_ip"></a> [hypervisor\_ip](#input\_hypervisor\_ip) | The hypervisor IP address | `string` | n/a | yes |
 | <a name="input_vm_domain_name"></a> [vm\_domain\_name](#input\_vm\_domain\_name) | The domain name of the VM network | `string` | n/a | yes |
