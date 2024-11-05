@@ -39,3 +39,15 @@ variable "dhcp_range_end" {
   default     = 150
   description = "The end host number of the DHCP range"
 }
+
+variable "datastore_name" {
+  type        = string
+  description = "The name of the datastore"
+  default     = "datastore"
+}
+
+variable "datastore_path" {
+  type        = string
+  default     = "/var/lib/libvirt/machines"
+  description = "The datastore folder path"
+}

@@ -67,15 +67,7 @@ resource "libvirt_network" "network" {
 }
 
 resource "libvirt_pool" "datastore" {
-  name = "datastore"
+  name = var.datastore_name
   type = "dir"
-  path = "/var/lib/libvirt/machines"
-}
-
-// base disk ubuntu image
-resource "libvirt_volume" "base_volume" {
-  source = "https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img"
-  name   = "ubuntu-noble-server-cloudimg-amd64.qcow2"
-  pool   = libvirt_pool.datastore.name
-  format = "qcow2"
+  path = var.datastore_path
 }
