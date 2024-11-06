@@ -46,11 +46,6 @@ variable "vpc_domain_name" {
   description = "The domain name of the VM network"
 }
 
-variable "vpc_name" {
-  type        = string
-  description = "The hypervisor local VM network name"
-}
-
 variable "datastore_name" {
   type = string
 }

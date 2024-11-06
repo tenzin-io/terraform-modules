@@ -14,7 +14,6 @@ A Terraform module that creates virtual machines on a libvirtd host.
 | <a name="input_vm_memory_size_mib"></a> [vm\_memory\_size\_mib](#input\_vm\_memory\_size\_mib) | n/a | `number` | `2048` | no |
 | <a name="input_vm_node_count"></a> [vm\_node\_count](#input\_vm\_node\_count) | The number of virtual machine nodes in the cluster | `number` | `2` | no |
 | <a name="input_vpc_domain_name"></a> [vpc\_domain\_name](#input\_vpc\_domain\_name) | The domain name of the VM network | `string` | `"virtual.lan"` | no |
-| <a name="input_vpc_name"></a> [vpc\_name](#input\_vpc\_name) | The hypervisor local VM network name | `string` | n/a | yes |
 | <a name="input_vpc_network_cidr"></a> [vpc\_network\_cidr](#input\_vpc\_network\_cidr) | The VM network CIDR block | `string` | n/a | yes |
 
 ## Outputs
