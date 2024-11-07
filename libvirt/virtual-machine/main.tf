@@ -46,12 +46,6 @@ resource "libvirt_domain" "machine" {
     file = "/var/lib/libvirt/qemu/nvram/${var.name}-VARS.fd"
   }
 
-  xml {
-    xslt = var.gpu_pci_bus == null ? file("${path.module}/files/base-transform.xsl") : templatefile("${path.module}/templates/gpu-transform.xsl", {
-      gpu_pci_bus = var.gpu_pci_bus
-    })
-  }
-
   console {
     type        = "pty"
     target_port = "0"
