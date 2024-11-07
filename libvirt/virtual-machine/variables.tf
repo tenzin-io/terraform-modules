@@ -42,12 +42,6 @@ variable "base_volume_id" {
   type = string
 }
 
-variable "gpu_pci_bus" {
-  type        = string
-  default     = null
-  description = "The PCI bus number of the GPU device"
-}
-
 variable "data_disks" {
   type = map(object({
     mount_path    = string

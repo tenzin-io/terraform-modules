@@ -10,10 +10,9 @@ terraform {
 resource "libvirt_cloudinit_disk" "cloudinit_iso" {
   name = "${var.name}-cloudinit-seed.iso"
   user_data = templatefile("${path.module}/templates/cloud-init.cfg", {
-    hostname                  = var.name
-    domain_name               = var.domain_name
-    install_nvidia_gpu_driver = var.gpu_pci_bus == null ? false : true
-    data_disks                = var.data_disks
+    hostname    = var.name
+    domain_name = var.domain_name
+    data_disks  = var.data_disks
   })
   pool = var.datastore_name
 }
