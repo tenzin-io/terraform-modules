@@ -46,6 +46,10 @@ resource "libvirt_domain" "machine" {
     file = "/var/lib/libvirt/qemu/nvram/${var.name}-VARS.fd"
   }
 
+  xml {
+    xslt = file("${path.module}/files/base-transform.xslt")
+  }
+
   console {
     type        = "pty"
     target_port = "0"
