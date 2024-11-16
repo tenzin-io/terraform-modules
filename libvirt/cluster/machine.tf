@@ -18,7 +18,7 @@ module "agent" {
   datastore_name  = var.datastore_name
   base_volume_id  = var.base_volume_id
   network_id      = libvirt_network.vpc_network.id
-  addresses       = [cidrhost(var.vpc_network_cidr, 10 + count.index)]
+  addresses       = [cidrhost(var.vpc_network_cidr, 2)]
   cpu_count       = var.vm_cpu_count
   memory_size_mib = var.vm_memory_size_mib
   disk_size_mib   = var.vm_disk_size_mib
