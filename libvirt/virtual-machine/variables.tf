@@ -51,3 +51,9 @@ variable "data_disks" {
   default     = {}
   description = "A map of data disks to add to the virtual machine"
 }
+
+variable "launch_script" {
+  type        = string
+  default     = ""
+  description = "The a custom script to run on the machine after cloud-init has finished"
+}

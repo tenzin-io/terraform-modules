@@ -1,4 +1,5 @@
 terraform {
+  required_version = "~> 1.9.8"
   required_providers {
     libvirt = {
       source  = "dmacvicar/libvirt"
@@ -10,13 +11,13 @@ terraform {
 resource "libvirt_cloudinit_disk" "cloudinit_iso" {
   name = "${var.name}-cloudinit-seed.iso"
   user_data = templatefile("${path.module}/templates/cloud-init.cfg", {
-    hostname    = var.name
-    domain_name = var.domain_name
-    data_disks  = var.data_disks
+    hostname      = var.name
+    domain_name   = var.domain_name
+    data_disks    = var.data_disks
+    launch_script = var.launch_script
   })
   pool = var.datastore_name
 }
-
 
 resource "libvirt_volume" "root_disk" {
   name           = "${var.name}-root-disk.qcow2"
