@@ -13,9 +13,8 @@
 # }
 
 module "agent" {
-  count           = var.vm_node_count
   source          = "git::https://github.com/tenzin-io/terraform-modules.git//libvirt/virtual-machine?ref=main"
-  name            = "${var.cluster_name}-worker-${count.index}"
+  name            = "${var.cluster_name}-agent"
   datastore_name  = var.datastore_name
   base_volume_id  = var.base_volume_id
   network_id      = libvirt_network.vpc_network.id
