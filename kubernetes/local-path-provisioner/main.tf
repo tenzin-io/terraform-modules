@@ -18,22 +18,22 @@ resource "helm_release" "local_path_provisioner" {
   }
 
   set {
-    name = "sharedFileSystemPath"
+    name  = "sharedFileSystemPath"
     value = var.local_path
   }
 
   set_list {
-    name = "nodePathMap"
+    name  = "nodePathMap"
     value = []
   }
 
-#  set {
-#    name  = "nodePathMap[0].node"
-#    value = "DEFAULT_PATH_FOR_NON_LISTED_NODES"
-#  }
-#
-#  set {
-#    name  = "nodePathMap[0].paths[0]"
-#    value = var.local_path
-#  }
+  #  set {
+  #    name  = "nodePathMap[0].node"
+  #    value = "DEFAULT_PATH_FOR_NON_LISTED_NODES"
+  #  }
+  #
+  #  set {
+  #    name  = "nodePathMap[0].paths[0]"
+  #    value = var.local_path
+  #  }
 }
