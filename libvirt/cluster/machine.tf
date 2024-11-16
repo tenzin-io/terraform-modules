@@ -24,6 +24,6 @@ module "agent" {
   disk_size_mib   = var.vm_disk_size_mib
   data_disks      = var.vm_data_disks
   launch_script = templatefile("${path.module}/templates/agent_script.sh", {
-    agent_key = "1234"
+    tailscale_auth_key = var.tailscale_auth_key
   })
 }
