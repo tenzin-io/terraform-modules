@@ -24,7 +24,7 @@ resource "helm_release" "local_path_provisioner" {
 
   set {
     name  = "nodePathMap"
-    value = null
+    value = ""
   }
 
   #  set {
