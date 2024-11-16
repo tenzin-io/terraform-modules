@@ -22,7 +22,7 @@ resource "helm_release" "local_path_provisioner" {
     value = var.local_path
   }
 
-  set_list {
+  set {
     name  = "nodePathMap"
     value = null
   }
