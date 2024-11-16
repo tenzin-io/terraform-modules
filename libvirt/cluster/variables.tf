@@ -53,7 +53,3 @@ variable "datastore_name" {
 variable "base_volume_id" {
   type = string
 }
-
-variable "tailscale_auth_key" {
-  type = string
-}
