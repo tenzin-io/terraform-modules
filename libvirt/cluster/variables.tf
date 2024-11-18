@@ -63,13 +63,13 @@ variable "base_volume_id" {
 variable "tailscale_auth_key" {
   type      = string
   sensitive = true
-  default = ""
+  default   = ""
 }
 
 variable "cloudflare_tunnel_token" {
   type      = string
   sensitive = true
-  default = ""
+  default   = ""
 }
 
 variable "docker_hub_user" {

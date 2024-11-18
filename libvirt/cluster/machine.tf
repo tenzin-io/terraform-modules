@@ -59,7 +59,7 @@ module "k8s_control_plane" {
 }
 
 module "k8s_worker_nodes" {
-  count           = 3
+  count           = var.vm_node_count
   source          = "../virtual-machine"
   name            = "${var.cluster_name}-worker-node-${count.index}"
   datastore_name  = var.datastore_name
