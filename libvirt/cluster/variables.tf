@@ -46,10 +46,38 @@ variable "vpc_domain_name" {
   description = "The domain name of the VM network"
 }
 
+variable "alternative_domain_names" {
+  type        = list(string)
+  default     = []
+  description = "A list of alternative domain names for the VM network"
+}
+
 variable "datastore_name" {
   type = string
 }
 
 variable "base_volume_id" {
   type = string
+}
+
+variable "tailscale_auth_key" {
+  type      = string
+  sensitive = true
+  default = ""
+}
+
+variable "cloudflare_tunnel_token" {
+  type      = string
+  sensitive = true
+  default = ""
+}
+
+variable "docker_hub_user" {
+  type      = string
+  sensitive = true
+}
+
+variable "docker_hub_token" {
+  type      = string
+  sensitive = true
 }

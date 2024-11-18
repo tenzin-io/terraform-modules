@@ -1,6 +1,6 @@
 resource "libvirt_network" "vpc_network" {
   name      = "${var.cluster_name}-network"
-  mode      = "nat"
+  mode      = "route"
   autostart = true
   domain    = var.vpc_domain_name
   addresses = [var.vpc_network_cidr]
@@ -25,6 +25,12 @@ resource "libvirt_network" "vpc_network" {
       hostname = "gateway"
       ip       = cidrhost(var.vpc_network_cidr, 1)
     }
+
+    // reserved virtual ip hosts
+    hosts {
+      hostname = "${var.cluster_name}-control"
+      ip       = cidrhost(var.vpc_network_cidr, 2)
+    }
   }
 
   dnsmasq_options {
@@ -46,6 +52,6 @@ resource "libvirt_network" "vpc_network" {
       option_name  = "dhcp-option"
       option_value = "option:domain-search,${var.vpc_domain_name}"
     }
-
   }
+
 }
