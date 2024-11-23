@@ -24,7 +24,6 @@ variable "vm_cpu_count" {
   default = 2
 }
 
-
 variable "vm_data_disks" {
   type = map(object({
     mount_path    = string
@@ -52,12 +51,10 @@ variable "alternative_domain_names" {
   description = "A list of alternative domain names for the VM network"
 }
 
-variable "datastore_name" {
-  type = string
-}
-
-variable "base_volume_id" {
-  type = string
+variable "datastore_path_prefix" {
+  type        = string
+  default     = "/data"
+  description = "The hypervisor host path prefix"
 }
 
 variable "tailscale_auth_key" {
@@ -80,4 +77,21 @@ variable "docker_hub_user" {
 variable "docker_hub_token" {
   type      = string
   sensitive = true
+}
+
+variable "hypervisor_connection" {
+  type = object({
+    host        = string
+    user        = string
+    private_key = string
+  })
+  description = "The hypervisor connection details to perform provisioner actions."
+}
+
+variable "base_volume" {
+  type = object({
+    id   = string
+    name = string
+    pool = string
+  })
 }

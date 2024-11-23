@@ -7,11 +7,11 @@ echo 'Acquire::Retries "5";' > /etc/apt/apt.conf.d/80-retries
 
 apt-get install -y nfs-common
 
-mkdir -p /data/shared
-echo "${filestore_host}:/data/shared /data/shared nfs4 rw,relatime 0 0" >> /etc/fstab
+mkdir -p ${shared_filesystem_path}
+echo "${filestore_host}:${shared_filesystem_path} ${shared_filesystem_path} nfs4 rw,relatime 0 0" >> /etc/fstab
 
 systemctl daemon-reload
-mount /data/shared
+mount ${shared_filesystem_path}
 
 ### Setup Kubernetes
 
@@ -51,7 +51,7 @@ cd /setup-kubernetes/cluster-node
 cat <<'eof' > vars.yaml
 # kubernetes
 node_type: ${node_type}
-skip_phase_mark_control_plane: False
+skip_phase_mark_control_plane: ${skip_phase_mark_control_plane}
 %{~ if length(alternative_domain_names) == 0 }
 control_plane_endpoint_name: ${cluster_virtual_hostname}.${vpc_domain_name}
 %{~ else }
@@ -73,6 +73,9 @@ keepalived_router_id: 100
 keepalived_interface: enp1s0
 keepalived_virtual_address: ${cluster_virtual_ip}
 keepalived_cluster_password: clusterpass
+
+# shared filesystem
+cluster_filesystem_path: ${shared_filesystem_path}
 eof
 
 ansible-playbook main.yaml
@@ -89,6 +92,7 @@ apt-get update && apt-get install -y terraform
 cd /setup-kubernetes/platform-addons
 cat <<'eof' > terraform.tfvars
 cloudflare_tunnel_token = "${cloudflare_tunnel_token}"
+cluster_filesystem_path = "${shared_filesystem_path}"
 eof
 terraform init && terraform apply -auto-approve
 %{ endif }

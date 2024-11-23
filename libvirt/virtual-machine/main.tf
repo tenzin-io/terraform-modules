@@ -3,7 +3,7 @@ terraform {
   required_providers {
     libvirt = {
       source  = "dmacvicar/libvirt"
-      version = "0.8.0"
+      version = "0.8.1"
     }
   }
 }
@@ -20,10 +20,11 @@ resource "libvirt_cloudinit_disk" "cloudinit_iso" {
 }
 
 resource "libvirt_volume" "root_disk" {
-  name           = "${var.name}-root-disk.qcow2"
-  base_volume_id = var.base_volume_id
-  size           = var.disk_size_mib * 1024 * 1024 // size must be in bytes
-  pool           = var.datastore_name
+  name             = "${var.name}-root-disk.qcow2"
+  base_volume_name = var.base_volume.name
+  base_volume_pool = var.base_volume.pool
+  size             = var.disk_size_mib * 1024 * 1024 // size must be in bytes
+  pool             = var.datastore_name
 }
 
 resource "libvirt_volume" "data_disk" {

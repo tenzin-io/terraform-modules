@@ -38,10 +38,6 @@ variable "network_id" {
   type = string
 }
 
-variable "base_volume_id" {
-  type = string
-}
-
 variable "data_disks" {
   type = map(object({
     mount_path    = string
@@ -56,4 +52,13 @@ variable "launch_script" {
   type        = string
   default     = ""
   description = "The a custom script to run on the machine after cloud-init has finished"
+}
+
+variable "base_volume" {
+  type = object({
+    id   = string
+    name = string
+    pool = string
+  })
+  description = "The base volume to use for the OS root disk"
 }
