@@ -10,7 +10,7 @@ terraform {
 resource "helm_release" "cloudflare_tunnel" {
   name             = "cloudflare-tunnel"
   namespace        = var.namespace
-  create_namespace = false
+  create_namespace = true
   repository       = "oci://ghcr.io/tenzin-io"
   chart            = "cloudflare-tunnel"
   version          = "v0.0.0"
