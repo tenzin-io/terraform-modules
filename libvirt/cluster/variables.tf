@@ -95,3 +95,8 @@ variable "base_volume" {
     pool = string
   })
 }
+
+variable "cluster_number" {
+  type        = number
+  description = "A number that designtaes the cluster"
+}

@@ -3,8 +3,8 @@ locals {
     # kubernetes setup
     vpc_domain_name               = var.vpc_domain_name
     alternative_domain_names      = var.alternative_domain_names
-    cluster_api_listen_port       = 8001
-    cluster_virtual_hostname      = "${var.cluster_name}-control"
+    cluster_api_listen_port       = 8000 + var.cluster_number
+    cluster_virtual_hostname      = "kubernetes"
     cluster_virtual_ip            = cidrhost(var.vpc_network_cidr, 2)
     skip_phase_mark_control_plane = false
 

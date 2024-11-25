@@ -28,7 +28,7 @@ resource "libvirt_network" "vpc_network" {
 
     // reserved virtual ip hosts
     hosts {
-      hostname = "${var.cluster_name}-control"
+      hostname = "kubernetes"
       ip       = cidrhost(var.vpc_network_cidr, 2)
     }
   }

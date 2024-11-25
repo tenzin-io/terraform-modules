@@ -13,7 +13,7 @@ echo "${filestore_host}:${shared_filesystem_path} ${shared_filesystem_path} nfs4
 systemctl daemon-reload
 mount ${shared_filesystem_path}
 
-### Setup Kubernetes
+### Setup Kubernetes system prep
 
 apt-get install -y ansible-core
 
@@ -45,6 +45,8 @@ docker_hub_token: ${docker_hub_token}
 eof
 
 ansible-playbook main.yaml
+
+### Setup Kubernetes node
 
 cd /setup-kubernetes/cluster-node
 
@@ -89,10 +91,12 @@ gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring
 echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/hashicorp.list
 apt-get update && apt-get install -y terraform
 
+### Setup initial platform components
 cd /setup-kubernetes/platform-addons
 cat <<'eof' > terraform.tfvars
 cloudflare_tunnel_token = "${cloudflare_tunnel_token}"
 cluster_filesystem_path = "${shared_filesystem_path}"
 eof
+
 terraform init && terraform apply -auto-approve
 %{ endif }
