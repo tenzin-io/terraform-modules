@@ -1,32 +1,19 @@
-ingress:
-  enabled: ${enable_ingress}
-  annotations:
-    cert-manager.io/cluster-issuer: ${cert_issuer_name}
-    nginx.ingress.kubernetes.io/proxy-body-size: 50m
-    nginx.ingress.kubernetes.io/backend-protocol: HTTP
-  hosts:
-    - ${grafana_fqdn}
-  tls:
-  - hosts:
-    - ${grafana_fqdn}
-    secretName: grafana-tls-secret
-
 persistence:
   enabled: true
   size: ${grafana_volume_size}
 
-# datasources:
-#   datasource.yaml:
-#     apiVersion: 1
-#     datasources:
-#       - name: Prometheus
-#         type: prometheus
-#         access: proxy
-#         url: http://prometheus-kube-prometheus-prometheus:9090
-#         jsonData:
-#           manageAlerts: false
-#           prometheusType: Prometheus
-#           prometheusVersion: '0.73.2'
+datasources:
+  datasource.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        access: proxy
+        url: ${prometheus_url}
+        jsonData:
+          manageAlerts: false
+          prometheusType: Prometheus
+          prometheusVersion: '0.73.2'
 
 %{~ if enable_github_oauth ~}
 envFromSecret: ${github_oauth_secret_name}

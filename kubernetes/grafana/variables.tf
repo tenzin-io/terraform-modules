@@ -52,3 +52,8 @@ variable "github_oauth_client_secret" {
   description = "GitHub OAuth app client secret."
   default     = ""
 }
+
+variable "prometheus_url" {
+  type    = string
+  default = "http://prometheus-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090"
+}

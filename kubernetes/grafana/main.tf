@@ -33,18 +33,17 @@ resource "helm_release" "grafana" {
   name             = "grafana"
   chart            = "grafana"
   repository       = "https://grafana.github.io/helm-charts"
-  version          = "7.3.11"
+  version          = "8.6.1"
   namespace        = var.namespace
   create_namespace = true
   values = [
     templatefile("${path.module}/templates/values.yaml", {
       grafana_volume_size         = var.grafana_volume_size
       grafana_fqdn                = var.grafana_fqdn
-      cert_issuer_name            = var.cert_issuer_name
       enable_github_oauth         = var.enable_github_oauth
       allowed_github_organization = var.allowed_github_organization
       github_oauth_secret_name    = local.github_oauth_secret_name
-      enable_ingress              = var.enable_ingress
+      prometheus_url              = var.prometheus_url
     })
   ]
 }
