@@ -1,51 +1,11 @@
 defaultRules:
-  create: true
-  rules:
-    alertmanager: true
-    etcd: false
-    configReloaders: false
-    general: false
-    k8s: false
-    kubeApiserverAvailability: false
-    kubeApiserverBurnrate: false
-    kubeApiserverHistogram: false
-    kubeApiserverSlos: false
-    kubeControllerManager: false
-    kubelet: false
-    kubeProxy: false
-    kubePrometheusGeneral: false
-    kubePrometheusNodeRecording: false
-    kubernetesApps: false
-    kubernetesResources: false
-    kubernetesStorage: false
-    kubernetesSystem: false
-    kubeSchedulerAlerting: false
-    kubeSchedulerRecording: false
-    kubeStateMetrics: false
-    network: false
-    node: false
-    nodeExporterAlerting: false
-    nodeExporterRecording: false
-    prometheus: true
-    prometheusOperator: true
+  create: false
 
 grafana:
   enabled: false
 
 alertmanager:
-  enabled: true
-  config:
-    global:
-      resolve_timeout: 5m
-
-    route:
-      group_by: ['alertname','cluster','namespace']
-      group_wait: 30s
-      group_interval: 5m
-      repeat_interval: 12h
-
-    templates:
-      - '/etc/alertmanager/config/*.tmpl'
+  enabled: false
 
 kubelet:
   enabled: true
@@ -85,8 +45,6 @@ prometheusOperator:
 
 prometheus:
   prometheusSpec:
-    externalLabels:
-      cluster: ${kubernetes_cluster_name}
     retention: ${metrics_retention_duration}
     scrapeInterval: ${metrics_scrape_interval}
     storageSpec:
