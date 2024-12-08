@@ -12,7 +12,7 @@ resource "helm_release" "jupyterhub" {
   name             = "jupyterhub"
   chart            = "jupyterhub"
   repository       = "https://hub.jupyter.org/helm-chart/"
-  version          = "3.3.7"
+  version          = "4.0.0"
   namespace        = "jupyterhub"
   create_namespace = true
   timeout          = 30 * 60 // minutes
@@ -23,8 +23,6 @@ resource "helm_release" "jupyterhub" {
       github_oauth_client_id       = var.github_oauth_client_id,
       github_oauth_client_secret   = var.github_oauth_client_secret,
       allowed_github_organizations = var.allowed_github_organizations,
-      enable_ingress               = var.enable_ingress,
-      cert_issuer_name             = var.cert_issuer_name,
       gpu_count                    = var.enable_nvidia_gpu ? 1 : 0,
     })
   ]

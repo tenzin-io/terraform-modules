@@ -26,19 +26,6 @@ hub:
       authenticator_class: dummy
     %{~ endif ~}
 
-ingress:
-  enabled: ${enable_ingress}
-  annotations:
-    cert-manager.io/cluster-issuer: ${cert_issuer_name}
-    nginx.ingress.kubernetes.io/proxy-body-size: "100m"
-    nginx.ingress.kubernetes.io/backend-protocol: "http"
-  hosts:
-    - ${jupyterhub_fqdn}
-  tls:
-  - hosts:
-    - ${jupyterhub_fqdn}
-    secretName: jupyterhub-tls-secret
-
 proxy:
   service:
     type: ClusterIP

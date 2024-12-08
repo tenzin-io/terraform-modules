@@ -4,12 +4,6 @@ variable "jupyterhub_fqdn" {
   description = "The fully qualified name of Jupyter Hub instance."
 }
 
-variable "cert_issuer_name" {
-  type        = string
-  default     = "lets-encrypt"
-  description = "The name of the cert-manager certificate issuer"
-}
-
 variable "enable_github_oauth" {
   type        = bool
   default     = false
@@ -37,13 +31,11 @@ variable "allowed_github_organizations" {
 
 variable "jupyter_image_name" {
   type        = string
-  default     = "quay.io/jupyterhub/k8s-singleuser-sample"
   description = "The Jupyter notebook image to use"
 }
 
 variable "jupyter_image_tag" {
   type        = string
-  default     = "3.3.7"
   description = "The Jupyter notebook image tag to use"
 }
 
@@ -51,10 +43,4 @@ variable "enable_nvidia_gpu" {
   type        = bool
   default     = false
   description = "The Jupyter notebook requests GPU resources"
-}
-
-variable "enable_ingress" {
-  type        = bool
-  default     = false
-  description = "Create JupyterHub ingress"
 }
