@@ -121,3 +121,16 @@ variable "shared_filesystem_path" {
   type    = string
   default = "/data/shared"
 }
+
+variable "vault_address" {
+  type = string
+}
+
+variable "vault_username" {
+  type = string
+}
+
+variable "vault_password" {
+  type      = string
+  sensitive = true
+}

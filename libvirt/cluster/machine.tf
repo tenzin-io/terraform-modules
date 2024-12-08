@@ -3,6 +3,8 @@ locals {
     # kubernetes setup
     vpc_domain_name               = var.vpc_domain_name
     alternative_domain_names      = var.alternative_domain_names
+    cluster_name                  = var.cluster_name
+    cluster_uuid                  = var.cluster_uuid
     cluster_api_listen_port       = 6443
     cluster_virtual_hostname      = "kubernetes"
     cluster_virtual_ip            = cidrhost(var.vpc_network_cidr, 2)
@@ -10,6 +12,9 @@ locals {
     skip_phase_mark_control_plane = false
 
     # platform setup
+    vault_address           = var.vault_address
+    vault_username          = var.vault_username
+    vault_password          = var.vault_password
     cloudflare_tunnel_token = var.cloudflare_tunnel_token
     docker_hub_user         = var.docker_hub_user
     docker_hub_token        = var.docker_hub_token

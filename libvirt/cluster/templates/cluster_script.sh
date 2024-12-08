@@ -96,7 +96,12 @@ cd /setup-kubernetes/platform-addons
 cat <<'eof' > terraform.tfvars
 cluster_filesystem_path = "${shared_filesystem_path}"
 cluster_loadbalancer_ip = "${cluster_loadbalancer_ip}"
+cluster_name = "${cluster_name}"
+cluster_uuid = "${cluster_uuid}"
 eof
 
+export VAULT_ADDR=${vault_address}
+export TERRAFORM_VAULT_USERNAME=${vault_username}
+export TERRAFORM_VAULT_PASSWORD=${vault_password}
 terraform init && terraform apply -auto-approve
 %{ endif }
