@@ -103,5 +103,5 @@ eof
 export VAULT_ADDR=${vault_address}
 export TERRAFORM_VAULT_USERNAME=${vault_username}
 export TERRAFORM_VAULT_PASSWORD=${vault_password}
-terraform init && terraform apply -auto-approve
+terraform init && terraform apply -auto-approve -var=kubeconfig="$(</etc/kubernetes/admin.conf)"
 %{ endif }
