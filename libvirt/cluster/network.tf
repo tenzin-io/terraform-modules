@@ -1,6 +1,6 @@
 resource "libvirt_network" "vpc_network" {
-  name      = "${var.cluster_name}-network"
-  mode      = "route"
+  name      = "${var.cluster_name}-${var.cluster_uuid}-network"
+  mode      = var.vpc_network_mode
   autostart = true
   domain    = var.vpc_domain_name
   addresses = [var.vpc_network_cidr]
@@ -30,6 +30,11 @@ resource "libvirt_network" "vpc_network" {
     hosts {
       hostname = "kubernetes"
       ip       = cidrhost(var.vpc_network_cidr, 2)
+    }
+
+    hosts {
+      hostname = "loadbalancer"
+      ip       = cidrhost(var.vpc_network_cidr, 3)
     }
   }
 

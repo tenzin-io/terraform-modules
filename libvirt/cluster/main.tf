@@ -9,10 +9,10 @@ terraform {
 }
 
 resource "libvirt_pool" "datastore" {
-  name = "${var.cluster_name}-datastore"
+  name = "${var.cluster_name}-${var.cluster_uuid}-datastore"
   type = "dir"
   target {
-    path = "${var.datastore_path_prefix}/${var.cluster_name}-datastore"
+    path = "${var.datastore_path_prefix}/${var.cluster_name}-${var.cluster_uuid}-datastore"
   }
 }
 

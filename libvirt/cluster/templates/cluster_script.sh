@@ -94,8 +94,8 @@ apt-get update && apt-get install -y terraform
 ### Setup initial platform components
 cd /setup-kubernetes/platform-addons
 cat <<'eof' > terraform.tfvars
-cloudflare_tunnel_token = "${cloudflare_tunnel_token}"
 cluster_filesystem_path = "${shared_filesystem_path}"
+cluster_loadbalancer_ip = "${cluster_loadbalancer_ip}"
 eof
 
 terraform init && terraform apply -auto-approve

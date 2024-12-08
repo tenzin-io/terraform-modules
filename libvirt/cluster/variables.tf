@@ -3,28 +3,47 @@ variable "cluster_name" {
   description = "The name of the cluster"
 }
 
-variable "vm_node_count" {
-  type        = number
-  default     = 2
-  description = "The number of virtual machine nodes in the cluster"
+variable "cluster_uuid" {
+  type        = string
+  description = "The UUID of the cluster"
 }
 
-variable "vm_memory_size_mib" {
+variable "control_plane_node_count" {
+  type        = number
+  default     = 0
+  description = "The number of control plane nodes in the cluster"
+  validation {
+    condition     = var.control_plane_node_count >= 0 && var.control_plane_node_count < 9
+    error_message = "The control plane node count must be between 0 - 9."
+  }
+}
+
+variable "worker_node_count" {
+  type        = number
+  default     = 2
+  description = "The number of worker nodes in the cluster"
+  validation {
+    condition     = var.worker_node_count >= 0 && var.worker_node_count < 9
+    error_message = "The control plane node count must be between 0 - 9."
+  }
+}
+
+variable "worker_memory_size_mib" {
   type    = number
   default = 2048
 }
 
-variable "vm_disk_size_mib" {
+variable "worker_disk_size_mib" {
   type    = number
   default = 1024
 }
 
-variable "vm_cpu_count" {
+variable "worker_cpu_count" {
   type    = number
   default = 2
 }
 
-variable "vm_data_disks" {
+variable "worker_data_disks" {
   type = map(object({
     mount_path    = string
     disk_size_mib = number
@@ -45,6 +64,12 @@ variable "vpc_domain_name" {
   description = "The domain name of the VM network"
 }
 
+variable "vpc_network_mode" {
+  type        = string
+  default     = "nat"
+  description = "Whether the hypervisor should 'nat' the network or 'route' the network"
+}
+
 variable "alternative_domain_names" {
   type        = list(string)
   default     = []
@@ -55,6 +80,29 @@ variable "datastore_path_prefix" {
   type        = string
   default     = "/data"
   description = "The hypervisor host path prefix"
+}
+
+variable "docker_hub_user" {
+  type      = string
+  sensitive = true
+}
+
+variable "docker_hub_token" {
+  type      = string
+  sensitive = true
+}
+
+variable "base_volume" {
+  type = object({
+    id   = string
+    name = string
+    pool = string
+  })
+}
+
+variable "create_agent_node" {
+  type    = bool
+  default = false
 }
 
 variable "tailscale_auth_key" {
@@ -69,34 +117,7 @@ variable "cloudflare_tunnel_token" {
   default   = ""
 }
 
-variable "docker_hub_user" {
-  type      = string
-  sensitive = true
-}
-
-variable "docker_hub_token" {
-  type      = string
-  sensitive = true
-}
-
-variable "hypervisor_connection" {
-  type = object({
-    host        = string
-    user        = string
-    private_key = string
-  })
-  description = "The hypervisor connection details to perform provisioner actions."
-}
-
-variable "base_volume" {
-  type = object({
-    id   = string
-    name = string
-    pool = string
-  })
-}
-
-variable "cluster_number" {
-  type        = number
-  description = "A number that designtaes the cluster"
+variable "shared_filesystem_path" {
+  type    = string
+  default = "/data/shared"
 }
