@@ -92,14 +92,6 @@ variable "docker_hub_token" {
   sensitive = true
 }
 
-variable "base_volume" {
-  type = object({
-    id   = string
-    name = string
-    pool = string
-  })
-}
-
 variable "create_agent_node" {
   type    = bool
   default = false

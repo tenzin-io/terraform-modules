@@ -1,4 +1,10 @@
 locals {
+  cluster_base_volume = {
+    pool = libvirt_pool.cloud_images.name
+    name = libvirt_volume.ubuntu_cloud_image.name
+    id   = libvirt_volume.ubuntu_cloud_image.id
+  }
+
   cluster_launch_script_inputs = {
     # kubernetes setup
     vpc_domain_name               = var.vpc_domain_name
@@ -30,7 +36,7 @@ module "k8s_bootstrap_node" {
   source          = "../virtual-machine"
   name            = "${var.cluster_name}-${var.cluster_uuid}-bootstrap-node-${count.index}"
   datastore_name  = libvirt_pool.datastore.name
-  base_volume     = var.base_volume
+  base_volume     = local.cluster_base_volume
   network_id      = libvirt_network.vpc_network.id
   addresses       = [cidrhost(var.vpc_network_cidr, 10)]
   cpu_count       = 2
@@ -52,7 +58,7 @@ module "k8s_control_plane" {
   source          = "../virtual-machine"
   name            = "${var.cluster_name}-${var.cluster_uuid}-control-plane-${count.index}"
   datastore_name  = libvirt_pool.datastore.name
-  base_volume     = var.base_volume
+  base_volume     = local.cluster_base_volume
   network_id      = libvirt_network.vpc_network.id
   addresses       = [cidrhost(var.vpc_network_cidr, 11 + count.index)]
   cpu_count       = 2
@@ -73,7 +79,7 @@ module "k8s_worker_nodes" {
   source          = "../virtual-machine"
   name            = "${var.cluster_name}-${var.cluster_uuid}-worker-node-${count.index}"
   datastore_name  = libvirt_pool.datastore.name
-  base_volume     = var.base_volume
+  base_volume     = local.cluster_base_volume
   network_id      = libvirt_network.vpc_network.id
   addresses       = [cidrhost(var.vpc_network_cidr, 20 + count.index)]
   cpu_count       = var.worker_cpu_count
@@ -95,7 +101,7 @@ module "filestore" {
   source         = "../virtual-machine"
   name           = "${var.cluster_name}-${var.cluster_uuid}-filestore-${count.index}"
   datastore_name = libvirt_pool.datastore.name
-  base_volume    = var.base_volume
+  base_volume    = local.cluster_base_volume
   network_id     = libvirt_network.vpc_network.id
   addresses      = [cidrhost(var.vpc_network_cidr, 4)]
 
@@ -120,7 +126,7 @@ module "agent_node" {
   source          = "../virtual-machine"
   name            = "${var.cluster_name}-${var.cluster_uuid}-agent-node-${count.index}"
   datastore_name  = libvirt_pool.datastore.name
-  base_volume     = var.base_volume
+  base_volume     = local.cluster_base_volume
   network_id      = libvirt_network.vpc_network.id
   addresses       = [cidrhost(var.vpc_network_cidr, 5)]
   cpu_count       = 4
