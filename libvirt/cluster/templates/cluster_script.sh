@@ -10,6 +10,11 @@ apt-get install -y nfs-common
 mkdir -p ${shared_filesystem_path}
 echo "${filestore_host}:${shared_filesystem_path} ${shared_filesystem_path} nfs4 rw,relatime 0 0" >> /etc/fstab
 
+# Loop until the NFS share is accessible
+echo "Waiting for NFS share ${filestore_host}:${shared_filesystem_path} to become available..."
+while ! showmount -e "${filestore_host}" | grep -q "${shared_filesystem_path}"; do sleep 2; done
+echo "NFS share ${filestore_host}:${shared_filesystem_path} is available!"
+
 systemctl daemon-reload
 mount ${shared_filesystem_path}
 
